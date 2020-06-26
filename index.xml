@@ -77,6 +77,250 @@
     </item>
     
     <item>
+      <title>TidyTuesday - African American History</title>
+      <link>/post/2020-06-26-ttafamhistory/</link>
+      <pubDate>Fri, 26 Jun 2020 21:13:14 -0500</pubDate>
+      <guid>/post/2020-06-26-ttafamhistory/</guid>
+      <description>
+
+
+&lt;div id=&#34;tidy-tuesday-week-25---african-american-history&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tidy Tuesday Week 25 - African-American History&lt;/h2&gt;
+&lt;p&gt;This is my first week exploring tidy tuesday data. Information about the project and datasets is at &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge’s excellent &lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-little-history&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;A Little History&lt;/h2&gt;
+&lt;p&gt;I learned a lot just by looking at the data provided. I was not previously aware of the history captured in the african_names dataset - which lists the names of enslaved people that were freed as they were being illegally smuggled to the Americas. The most names were recorded at the port of Freetown in Sierra Leone before making the trans-atlantic journey. Here’s the description of the dataset excepted on the tidytuesday github page:&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;During the last 60 years of the trans-Atlantic slave trade, courts around the Atlantic basins condemned over two thousand vessels for engaging in the traffic and recorded the details of captives found on board including their African names. The African Names Database was created from these records, now located in the Registers of Liberated Africans at the Sierra Leone National Archives, Freetown, as well as Series FO84, FO313, CO247 and CO267 held at the British National Archives in London. Links are provided to the ships in the Voyages Database from which the liberated Africans were rescued, as well as to the African Origins site where users can hear the names pronounced and help us identify the languages in which they think the names are used.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 1: &lt;/span&gt;Data summary&lt;/caption&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;african_names&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Number of rows&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;91490&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Number of columns&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;_______________________&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Column type frequency:&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;character&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;numeric&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;________________________&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Group variables&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Variable type: character&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;min&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;max&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;empty&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_unique&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;whitespace&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;name&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;24&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62330&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;gender&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12878&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.86&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ship_name&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;443&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;port_disembark&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;19&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;port_embark&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;country_origin&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79404&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.13&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;563&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Variable type: numeric&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mean&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sd&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p0&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p25&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p50&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p75&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p100&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;hist&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62122.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51305.07&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22935.25&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45822.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;101263.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;199932&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▇▆▃▁▂&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;voyage_id&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17698.25&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;82016.88&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;557.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2443.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2871.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3601.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;500082&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▇▁▁▁▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;age&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;18.89&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.60&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;26.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;77&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▆▇▁▁▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;height&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4820&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.95&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;58.61&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.84&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;64.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▁▁▂▇▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;year_arrival&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1831.40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9.52&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1808.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1826.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1832.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1837.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1862&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▂▆▇▃▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+## # Groups:   port_disembark [5]
+##   port_disembark          n
+##   &amp;lt;chr&amp;gt;               &amp;lt;int&amp;gt;
+## 1 Freetown            81009
+## 2 Havana              10058
+## 3 Bahamas unspecified   183
+## 4 Kingston, Jamaica     144
+## 5 St. Helena             96&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From this output we can see that &lt;code&gt;country_origin&lt;/code&gt; has the most missing data by far. There’s a clue about this in the description of the data above, which mentions the &lt;em&gt;African Origins site, where users can hear the names pronounced and help identify the languages in which they think the names are used&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So the people who were liberated were from such different cultures that the original documentarians could not speak the same language or determine where they originally came from. We can see that about 81,000 people were freed in Freetown (This now makes sense - again learning lots here). About 10,000 people were freed in Havana, Cuba, and many less in other locations in the caribbean.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;age&lt;/code&gt; variable includes entries from a 6-month old child to a 77 year old person. The &lt;code&gt;gender&lt;/code&gt; variable has 12,878 missing values and 4 options. I’ll use some of the same techniques as Julia Silge to clean up this data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;african_names %&amp;gt;%
+  group_by(port_disembark, year_arrival) %&amp;gt;%
+  count() %&amp;gt;% 
+  arrange(desc(year_arrival)) %&amp;gt;%
+  ggplot(aes(x = year_arrival, y = n, color = port_disembark)) + geom_line(alpha = 0.6, size = 2) + geom_point(alpha = 0.6)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-06-26-ttAfAmhistory_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can see that the majority of liberations occured in Freetown. I wonder if the ships had stopped going to Freetown by 1849, or if there was less enforcement, or if they stopped being recorded. Similary, I wonder what the policies were in each of the other ports that made them free enslaved Africans for the time periods reflected in this data.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Getting Started</title>
       <link>/publication/conference-paper/</link>
       <pubDate>Wed, 24 Jun 2020 00:00:00 +0000</pubDate>
@@ -797,6 +1041,253 @@ Figure 1: A fancy pie chart.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Black_History</title>
+      <link>/post/2020-06-26-ttblackhistory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/post/2020-06-26-ttblackhistory/</guid>
+      <description>&lt;h2 id=&#34;tidy-tuesday-week-25---african-american-history&#34;&gt;Tidy Tuesday Week 25 - African-American History&lt;/h2&gt;
+&lt;p&gt;This is my first week exploring tidy tuesday data. Information about the project and datasets is at 
+&lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge&amp;rsquo;s excellent 
+&lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
+&lt;h2 id=&#34;a-little-history&#34;&gt;A Little History&lt;/h2&gt;
+&lt;p&gt;I learned a lot just by looking at the data provided. I was not previously aware of the history captured in the african_names dataset - which lists the names of enslaved people that were freed as they were being illegally smuggled to the Americas. The most names were recorded at the port of Freetown in Sierra Leone before making the trans-atlantic journey. Here&amp;rsquo;s the description of the dataset excepted on the tidytuesday github page:&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;During the last 60 years of the trans-Atlantic slave trade, courts around the Atlantic basins condemned over two thousand vessels for engaging in the traffic and recorded the details of captives found on board including their African names. The African Names Database was created from these records, now located in the Registers of Liberated Africans at the Sierra Leone National Archives, Freetown, as well as Series FO84, FO313, CO247 and CO267 held at the British National Archives in London. Links are provided to the ships in the Voyages Database from which the liberated Africans were rescued, as well as to the African Origins site where users can hear the names pronounced and help us identify the languages in which they think the names are used.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Table: Data summary&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;african_names&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Number of rows&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;91490&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Number of columns&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;_______________________&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Column type frequency:&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;character&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;numeric&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;________________________&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Group variables&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Variable type: character&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;min&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;max&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;empty&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_unique&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;whitespace&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;name&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;24&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62330&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;gender&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;12878&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.86&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;ship_name&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;443&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;port_disembark&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;19&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;port_embark&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;country_origin&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;79404&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.13&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;563&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Variable type: numeric&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mean&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;sd&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p0&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p25&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p50&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p75&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;p100&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;hist&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;id&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62122.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;51305.07&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22935.25&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45822.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;101263.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;199932&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▇▆▃▁▂&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;voyage_id&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17698.25&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;82016.88&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;557.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2443.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2871.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3601.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;500082&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▇▁▁▁▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;age&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;18.89&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8.60&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;11.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;26.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;77&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▆▇▁▁▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;height&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4820&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.95&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;58.61&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6.84&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;64.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▁▁▂▇▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;year_arrival&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1831.40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9.52&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1808.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1826.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1832.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1837.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1862&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;▂▆▇▃▁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
+## # Groups:   port_disembark [5]
+##   port_disembark          n
+##   &amp;lt;chr&amp;gt;               &amp;lt;int&amp;gt;
+## 1 Freetown            81009
+## 2 Havana              10058
+## 3 Bahamas unspecified   183
+## 4 Kingston, Jamaica     144
+## 5 St. Helena             96
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From this output we can see that &lt;code&gt;country_origin&lt;/code&gt; has the most missing data by far. There&amp;rsquo;s a clue about this in the description of the data above, which mentions the &lt;em&gt;African Origins site, where users can hear the names pronounced and help identify the languages in which they think the names are used&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So the people who were liberated were from such different cultures that the original documentarians could not speak the same language or determine where they originally came from. We can see that about 81,000 people were freed in Freetown (This now makes sense - again learning lots here). About 10,000 people were freed in Havana, Cuba, and many less in other locations in the caribbean.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;age&lt;/code&gt; variable includes entries from a 6-month old child to a 77 year old person. The &lt;code&gt;gender&lt;/code&gt; variable has 12,878 missing values and 4 options. I&amp;rsquo;ll use some of the same techniques as Julia Silge to clean up this data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;african_names %&amp;gt;%
+  group_by(port_disembark, year_arrival) %&amp;gt;%
+  count() %&amp;gt;% 
+  arrange(desc(year_arrival)) %&amp;gt;%
+  ggplot(aes(x = year_arrival, y = n, color = port_disembark)) + geom_line(alpha = 0.6, size = 2) + geom_point(alpha = 0.6)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;2020-06-26-ttblackhistory_files/figure-html/unnamed-chunk-3-1.png&#34; alt=&#34;&#34;&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;We can see that the majority of liberations occured in Freetown. I wonder if the ships had stopped going to Freetown by 1849, or if there was less enforcement, or if they stopped being recorded. Similary, I wonder what the policies were in each of the other ports that made them free enslaved Africans for the time periods reflected in this data.&lt;/p&gt;
 </description>
     </item>
     
