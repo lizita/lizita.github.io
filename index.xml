@@ -77,17 +77,14 @@
     </item>
     
     <item>
-      <title>TidyTuesday - African American History</title>
+      <title>Tidy Tuesday - African American History</title>
       <link>/post/2020-06-26-ttafamhistory/</link>
       <pubDate>Fri, 26 Jun 2020 21:13:14 -0500</pubDate>
       <guid>/post/2020-06-26-ttafamhistory/</guid>
       <description>
 
 
-&lt;div id=&#34;tidy-tuesday-week-25---african-american-history&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Tidy Tuesday Week 25 - African-American History&lt;/h2&gt;
-&lt;p&gt;This is my first week exploring tidy tuesday data. Information about the project and datasets is at &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge’s excellent &lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;If you’re not familiar with Tidy Tuesday, it is a weekly project hosted online by the R for data science community. Every Tuesday a new dataset is released and people are encouraged to explore, analyse, and visualize it in interesting ways. This is my first week exploring tidy tuesday data. Information about the project and datasets is at &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge’s excellent &lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
 &lt;div id=&#34;a-little-history&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;A Little History&lt;/h2&gt;
 &lt;p&gt;I learned a lot just by looking at the data provided. I was not previously aware of the history captured in the african_names dataset - which lists the names of enslaved people that were freed as they were being illegally smuggled to the Americas. The most names were recorded at the port of Freetown in Sierra Leone before making the trans-atlantic journey. Here’s the description of the dataset excepted on the tidytuesday github page:&lt;/p&gt;
@@ -1049,8 +1046,7 @@ Figure 1: A fancy pie chart.
       <link>/post/2020-06-26-ttblackhistory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/post/2020-06-26-ttblackhistory/</guid>
-      <description>&lt;h2 id=&#34;tidy-tuesday-week-25---african-american-history&#34;&gt;Tidy Tuesday Week 25 - African-American History&lt;/h2&gt;
-&lt;p&gt;This is my first week exploring tidy tuesday data. Information about the project and datasets is at 
+      <description>&lt;p&gt;If you&amp;rsquo;re not familiar with Tidy Tuesday, it is a weekly project hosted online by the R for data science community. Every Tuesday a new dataset is released and people are encouraged to explore, analyse, and visualize it in interesting ways. This is my first week exploring tidy tuesday data. Information about the project and datasets is at 
 &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge&amp;rsquo;s excellent 
 &lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
 &lt;h2 id=&#34;a-little-history&#34;&gt;A Little History&lt;/h2&gt;
