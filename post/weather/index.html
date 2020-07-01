@@ -601,7 +601,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    4 min read
+    5 min read
   </span>
   
 
@@ -704,12 +704,24 @@ all_hours &lt;- rbind(hourly, all_hours)}
 
 #convert unix time to date
 all_hours$time &lt;- as.POSIXct(all_hours$time, origin=&quot;1970-01-01&quot;)</code></pre>
+<p>I selected the columns I want and saved them as weather.csv. Let’s zoom in to two rainy days in May 2000.</p>
+<pre class="r"><code>library(ggplot2)
+weather &lt;- read.csv(&quot;weather.csv&quot;)
+weather &lt;- weather[2810:2845,]
+
+ggplot(weather, aes(x = time, y = precipIntensity, group =1)) + 
+  geom_point(alpha = 0.6, color = &quot;blue&quot;) +
+  geom_line(alpha = 0.6, color = &quot;blue&quot;) +
+  theme_gray() +
+  theme(axis.text.x=element_text(angle=90, hjust=1)) +
+  labs(title =&quot;Precipitation Over Time&quot;, x = &quot;Date&quot;, y = &quot;Precipitation in Inches&quot;)</code></pre>
+<p><img src="/post/weather/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.</p>
 <hr />
 </div>
 <div id="other-weather-options" class="section level2">
 <h2>Other Weather Options</h2>
-<p>Clearly getting historical weather data (hindcasting) for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.</p>
+<p>Clearly getting historical weather data for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.</p>
 <p>The helpful commenters on the R for Data Science Slack also suggested using <a href="https://www.ncdc.noaa.gov/data-access/land-based-station-data">NOAA</a> to get the data. This is probably a more robust dataset anyway, but the downside is that they don’t have the option to use lat/long as a location - you have to pick from one of their existing stations. In my case there wasn’t one near the field site I was interested in, but they’re spread out across the country so I bet it will be a great source for a lot of people. There’s a good tutorial on accessing this data at <a href="https://ropensci.org/tutorials/rnoaa_tutorial/">R Open Sci</a>.</p>
 <p>I’ve also hear the <a href="https://www.wunderground.com/pws/overview">Weather Underground</a> has a good API, but it looks like you need to contribute weather data with an IoT device to access it. Cool! But may not be useful to some.</p>
 <p>Are there any other sources of weather data that you know of? Do you have suggestions to improve the approach I used for the Dark Sky data?</p>
