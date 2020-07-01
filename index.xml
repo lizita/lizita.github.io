@@ -134,9 +134,8 @@ all_hours &amp;lt;- rbind(hourly, all_hours)}
 
 #convert unix time to date
 all_hours$time &amp;lt;- as.POSIXct(all_hours$time, origin=&amp;quot;1970-01-01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;it-will-take-me-a-few-days-of-using-my-1000-free-api-calls-to-cover-the-period-im-interested-in-but-overall-it-was-really-easy.&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.&lt;/h2&gt;
+&lt;p&gt;It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;other-weather-options&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Other Weather Options&lt;/h2&gt;
