@@ -789,24 +789,6 @@ Three
     </item>
     
     <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Terms</title>
-      <link>/terms/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/terms/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>External Project</title>
       <link>/project/external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
@@ -1042,248 +1024,72 @@ Figure 1: A fancy pie chart.
     </item>
     
     <item>
-      <title>Black_History</title>
-      <link>/post/2020-06-26-ttblackhistory/</link>
+      <title>Accessing Historical Weather Data with Dark Sky API</title>
+      <link>/post/weather/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/post/2020-06-26-ttblackhistory/</guid>
-      <description>&lt;p&gt;If you&amp;rsquo;re not familiar with Tidy Tuesday, it is a weekly project hosted online by the R for data science community. Every Tuesday a new dataset is released and people are encouraged to explore, analyse, and visualize it in interesting ways. This is my first week exploring tidy tuesday data. Information about the project and datasets is at 
-&lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;the tidytuesday github&lt;/a&gt;. Before working with this data I watched Julia Silge&amp;rsquo;s excellent 
-&lt;a href=&#34;https://juliasilge.com/blog/captive-africans-voyages/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;screencast&lt;/a&gt; and picked up some great ways to find missing values and recode data.&lt;/p&gt;
-&lt;h2 id=&#34;a-little-history&#34;&gt;A Little History&lt;/h2&gt;
-&lt;p&gt;I learned a lot just by looking at the data provided. I was not previously aware of the history captured in the african_names dataset - which lists the names of enslaved people that were freed as they were being illegally smuggled to the Americas. The most names were recorded at the port of Freetown in Sierra Leone before making the trans-atlantic journey. Here&amp;rsquo;s the description of the dataset excepted on the tidytuesday github page:&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;During the last 60 years of the trans-Atlantic slave trade, courts around the Atlantic basins condemned over two thousand vessels for engaging in the traffic and recorded the details of captives found on board including their African names. The African Names Database was created from these records, now located in the Registers of Liberated Africans at the Sierra Leone National Archives, Freetown, as well as Series FO84, FO313, CO247 and CO267 held at the British National Archives in London. Links are provided to the ships in the Voyages Database from which the liberated Africans were rescued, as well as to the African Origins site where users can hear the names pronounced and help us identify the languages in which they think the names are used.&lt;/em&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Table: Data summary&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Name&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;african_names&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Number of rows&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;91490&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Number of columns&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;11&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;_______________________&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Column type frequency:&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;character&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;numeric&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;________________________&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Group variables&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;None&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;Variable type: character&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;min&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;max&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;empty&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;n_unique&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;whitespace&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;name&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;24&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;62330&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;gender&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;12878&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.86&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;ship_name&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;443&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;port_disembark&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;19&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;port_embark&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;country_origin&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;79404&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.13&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;31&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;563&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;Variable type: numeric&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;skim_variable&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;n_missing&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;complete_rate&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;mean&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;sd&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p0&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p25&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p50&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p75&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;p100&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;hist&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;id&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;62122.02&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;51305.07&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;22935.25&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;45822.5&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;101263.8&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;199932&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;▇▆▃▁▂&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;voyage_id&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;17698.25&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;82016.88&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;557.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2443.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2871.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;3601.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;500082&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;▇▁▁▁▁&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;age&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1126&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.99&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;18.89&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;8.60&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;11.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;20.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;26.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;77&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;▆▇▁▁▁&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;height&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4820&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.95&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;58.61&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;6.84&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;54.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;60.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;64.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;85&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;▁▁▂▇▁&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;year_arrival&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1831.40&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;9.52&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1808.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1826.00&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1832.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1837.0&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1862&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;▂▆▇▃▁&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 2
-## # Groups:   port_disembark [5]
-##   port_disembark          n
-##   &amp;lt;chr&amp;gt;               &amp;lt;int&amp;gt;
-## 1 Freetown            81009
-## 2 Havana              10058
-## 3 Bahamas unspecified   183
-## 4 Kingston, Jamaica     144
-## 5 St. Helena             96
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;From this output we can see that &lt;code&gt;country_origin&lt;/code&gt; has the most missing data by far. There&amp;rsquo;s a clue about this in the description of the data above, which mentions the &lt;em&gt;African Origins site, where users can hear the names pronounced and help identify the languages in which they think the names are used&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;So the people who were liberated were from such different cultures that the original documentarians could not speak the same language or determine where they originally came from. We can see that about 81,000 people were freed in Freetown (This now makes sense - again learning lots here). About 10,000 people were freed in Havana, Cuba, and many less in other locations in the caribbean.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;age&lt;/code&gt; variable includes entries from a 6-month old child to a 77 year old person. The &lt;code&gt;gender&lt;/code&gt; variable has 12,878 missing values and 4 options. I&amp;rsquo;ll use some of the same techniques as Julia Silge to clean up this data.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;african_names %&amp;gt;%
-  group_by(port_disembark, year_arrival) %&amp;gt;%
-  count() %&amp;gt;% 
-  arrange(desc(year_arrival)) %&amp;gt;%
-  ggplot(aes(x = year_arrival, y = n, color = port_disembark)) + geom_line(alpha = 0.6, size = 2) + geom_point(alpha = 0.6)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;2020-06-26-ttblackhistory_files/figure-html/unnamed-chunk-3-1.png&#34; alt=&#34;&#34;&gt;&lt;!-- --&gt;&lt;/p&gt;
-&lt;p&gt;We can see that the majority of liberations occured in Freetown. I wonder if the ships had stopped going to Freetown by 1849, or if there was less enforcement, or if they stopped being recorded. Similary, I wonder what the policies were in each of the other ports that made them free enslaved Africans for the time periods reflected in this data.&lt;/p&gt;
+      <guid>/post/weather/</guid>
+      <description>
+
+
+&lt;div id=&#34;importing-past-weather-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Importing Past Weather Data&lt;/h2&gt;
+&lt;p&gt;In my IoT class last year we used a website called &lt;a href=&#34;https://darksky.net/&#34;&gt;Dark Sky&lt;/a&gt; to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( &lt;em&gt;Happy Canada Day!&lt;/em&gt; ) and several conversations with my advisor.&lt;/p&gt;
+&lt;p&gt;I’ll walk through how I imported the data to R and see if it matches changes in the potentiometric surface for nearby wells.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Dark Sky is a great resource, however, when I went to re-visit the website I found that they have joined Apple. This means they are no longer creating new accounts. Luckily I already had one from my class last fall. The API is still supported through at least the end of 2021. Later I’ll mention some ways that you could get similar (maybe better) data through other channels.&lt;/p&gt;
+&lt;p&gt;The API allows up to 1000 calls per day for free. Using the &lt;em&gt;Time Machine&lt;/em&gt; you can request data from a certain date and location. I focused on hourly data, though it’s probably finer resolution than I need.&lt;/p&gt;
+&lt;p&gt;“The &lt;code&gt;hourly&lt;/code&gt; data block will contain data points starting at midnight (local time) of the day requested, and continuing until midnight (local time) of the following day.”&lt;/p&gt;
+&lt;p&gt;The docs include a sample API call, which includes your key, the location, and the date requested.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GET https://api.darksky.net/forecast/0123456789abcdef9876543210fedcba/42.3601,-71.0589,255657600?exclude=currently,flags&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;A quick visit to my best friend stack overflow provided &lt;a href=&#34;https://stackoverflow.com/questions/46069322/r-api-call-for-json-data-and-converting-to-dataframe&#34;&gt;a little more clarity&lt;/a&gt; about how to use the API in R. The date is in UNIX format. I wanted to start at January 1, 2000, so I used a handy &lt;a href=&#34;https://www.unixtimestamp.com/&#34;&gt;UNIX converter&lt;/a&gt; to find my desired date number, 946684800. I replaced the url and now I’m ready to call the API.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#GET the url 
+req &amp;lt;- httr::GET(&amp;quot;https://api.darksky.net/forecast/{key}/30.012188,-94.024525,946684800?exclude=currently,flags&amp;quot;)
+req$status_code 
+# should be 200 if it worked. If you get 400, something has gone wrong.
+
+# extract req$content 
+cont &amp;lt;- req$content
+
+#Convert to char
+char &amp;lt;- rawToChar(req$content)
+
+#Convert to df 
+df &amp;lt;- jsonlite::fromJSON(char)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It worked! I removed my private API key, so you’ll have to take my word for it. But now I have a new problem - the call only works for one day at a time. I want a lot of days, so I decided to write a loop.&lt;/p&gt;
+&lt;p&gt;One thing I couldn’t get to work was changing the date inside the string for the API url. I posted in the R for Data Science Slack, and a few minutes later I learned a handy new trick - you can put a variable inside a string by just inserting it with quotes around the variable. Something like this:
+&lt;code&gt;&amp;quot;https://api.darksky.net/forecast/{key}/30.012188,-94.024525,&amp;quot;,day,&amp;quot;?exclude=currently,flags&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Great! I ran the loop and it worked, kinda. It errored out after the first run because rbind could not combine two data frames with different numbers of columns. After looking at the next few days to see which columns were off I saw that it went from 15 to 16 to 17, then back down. Very annoying! They must have added some new info for some days, but this made the data inconsistent so I had to add a select function to the loop. I selected for the 15 columns that were consistent across all days and ran it again. Success!&lt;/p&gt;
+&lt;p&gt;Here’s the code I ended up with:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+
+#initialize all_hours so there&amp;#39;s something to rbind to
+df &amp;lt;- jsonlite::fromJSON(paste0(&amp;quot;https://api.darksky.net/forecast/{key}/30.012188,-94.024525,946684800?exclude=currently,flags&amp;quot;))
+all_hours &amp;lt;- df$hourly$data
+
+# make a vector of unix dates I want (minus the first one, which I already put in all_hours)
+unix_day &amp;lt;- seq(946771200, 1033084800, by=86400) 
+
+for (day in unix_day){
+  
+df &amp;lt;- jsonlite::fromJSON(paste0(&amp;quot;https://api.darksky.net/forecast/{key}/30.012188,-94.024525,&amp;quot;,
+day,
+&amp;quot;?exclude=currently,flags&amp;quot;))
+
+hourly &amp;lt;- select(df$hourly$data, c(cols))
+                 
+all_hours &amp;lt;- rbind(hourly, all_hours)}
+
+#convert unix time to date
+all_hours$time &amp;lt;- as.POSIXct(all_hours$time, origin=&amp;quot;1970-01-01&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-weather-options&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Other Weather Options&lt;/h2&gt;
+&lt;p&gt;Clearly getting historical weather data (hindcasting) for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.&lt;/p&gt;
+&lt;p&gt;The helpful commenters on the R for Data Science Slack also suggested using &lt;a href=&#34;https://www.ncdc.noaa.gov/data-access/land-based-station-data&#34;&gt;NOAA&lt;/a&gt; to get the data. This is probably a more robust dataset anyway, but the downside is that they don’t have the option to use lat/long as a location - you have to pick from one of their existing stations. In my case there wasn’t one near the field site I was interested in, but they’re spread out across the country so I bet it will be a great source for a lot of people. There’s a good tutorial on accessing this data at &lt;a href=&#34;https://ropensci.org/tutorials/rnoaa_tutorial/&#34;&gt;R Open Sci&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I’ve also hear the &lt;a href=&#34;https://www.wunderground.com/pws/overview&#34;&gt;Weather Underground&lt;/a&gt; has a good API, but it looks like you need to contribute weather data with an IoT device to access it. Cool! But may not be useful to some.&lt;/p&gt;
+&lt;p&gt;Are there any other sources of weather data that you know of? Do you have suggestions to improve the approach I used for the Dark Sky data?&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
