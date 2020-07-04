@@ -5,12 +5,283 @@
     <link>/category/r/</link>
       <atom:link href="/category/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Fri, 03 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
       <title>R</title>
       <link>/category/r/</link>
     </image>
+    
+    <item>
+      <title>Mining Data from California&#39;s Geotracker Database</title>
+      <link>/post/geotracker/</link>
+      <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/post/geotracker/</guid>
+      <description>&lt;p&gt;
+&lt;a href=&#34;https://geotracker.waterboards.ca.gov/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Geotracker&lt;/a&gt; is a public database that is used to store environmental data from regulated sites in California. I&amp;rsquo;m going to download some data of a contaminated site and clean it up to try to derive some insights about the site. I picked Alpine county because it is the least populated one and I want to work with a smaller file. Some of the more industrial counties can have thousands of sites.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;URL &amp;lt;- &amp;quot;https://geotracker.waterboards.ca.gov/data_download/edf_by_county/AlpineEDF.zip&amp;quot;
+download.file(URL, destfile=&#39;alpine.zip&#39;, method=&#39;curl&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After downloading the zipped file I need to unzip it and read in the .txt file. Let&amp;rsquo;s see what&amp;rsquo;s inside.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;unzip(&#39;alpine.zip&#39;)
+alpine &amp;lt;- read.delim(&amp;quot;AlpineEDF.txt&amp;quot;)
+head(alpine)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A data.frame: 6 × 23&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;COUNTY&lt;/th&gt;&lt;th scope=col&gt;GLOBAL_ID&lt;/th&gt;&lt;th scope=col&gt;FIELD_PT_NAME&lt;/th&gt;&lt;th scope=col&gt;LOGDATE&lt;/th&gt;&lt;th scope=col&gt;LOGTIME&lt;/th&gt;&lt;th scope=col&gt;LOGCODE&lt;/th&gt;&lt;th scope=col&gt;SAMPID&lt;/th&gt;&lt;th scope=col&gt;MATRIX&lt;/th&gt;&lt;th scope=col&gt;LABWO&lt;/th&gt;&lt;th scope=col&gt;LABCODE&lt;/th&gt;&lt;th scope=col&gt;⋯&lt;/th&gt;&lt;th scope=col&gt;ANADATE&lt;/th&gt;&lt;th scope=col&gt;BASIS&lt;/th&gt;&lt;th scope=col&gt;PARLABEL&lt;/th&gt;&lt;th scope=col&gt;PARVAL&lt;/th&gt;&lt;th scope=col&gt;PARVQ&lt;/th&gt;&lt;th scope=col&gt;LABDL&lt;/th&gt;&lt;th scope=col&gt;REPDL&lt;/th&gt;&lt;th scope=col&gt;UNITS&lt;/th&gt;&lt;th scope=col&gt;DILFAC&lt;/th&gt;&lt;th scope=col&gt;LNOTE&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;int&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;⋯&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;K1     &lt;/td&gt;&lt;td&gt;2012-10-08&lt;/td&gt;&lt;td&gt;1110&lt;/td&gt;&lt;td&gt;CLSR&lt;/td&gt;&lt;td&gt;K1-15        &lt;/td&gt;&lt;td&gt;SO&lt;/td&gt;&lt;td&gt;CVJ0496&lt;/td&gt;&lt;td&gt;CLSR&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2012-10-12&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;PHCD &lt;/td&gt;&lt;td&gt; 0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.033&lt;/td&gt;&lt;td&gt; 1.0&lt;/td&gt;&lt;td&gt;MG/KG&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;     &lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;KMPUD#2&lt;/td&gt;&lt;td&gt;2008-12-30&lt;/td&gt;&lt;td&gt;1330&lt;/td&gt;&lt;td&gt;CLSR&lt;/td&gt;&lt;td&gt;KMPUD #2     &lt;/td&gt;&lt;td&gt;W &lt;/td&gt;&lt;td&gt;CSA0056&lt;/td&gt;&lt;td&gt;CLSR&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2009-01-07&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;MOIL &lt;/td&gt;&lt;td&gt;79&lt;/td&gt;&lt;td&gt;= &lt;/td&gt;&lt;td&gt;9.100&lt;/td&gt;&lt;td&gt;50.0&lt;/td&gt;&lt;td&gt;UG/L &lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;DU,DU&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;KMPUD#2&lt;/td&gt;&lt;td&gt;2002-04-16&lt;/td&gt;&lt;td&gt;1203&lt;/td&gt;&lt;td&gt;KFR &lt;/td&gt;&lt;td&gt;KMPUD #2     &lt;/td&gt;&lt;td&gt;WX&lt;/td&gt;&lt;td&gt;NA     &lt;/td&gt;&lt;td&gt;ALPS&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2002-04-18&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;MTBE &lt;/td&gt;&lt;td&gt; 0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.250&lt;/td&gt;&lt;td&gt; 0.5&lt;/td&gt;&lt;td&gt;UG/L &lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;     &lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;KMPUD#2&lt;/td&gt;&lt;td&gt;2002-04-16&lt;/td&gt;&lt;td&gt;1203&lt;/td&gt;&lt;td&gt;KFR &lt;/td&gt;&lt;td&gt;KMPUD #2     &lt;/td&gt;&lt;td&gt;WX&lt;/td&gt;&lt;td&gt;NA     &lt;/td&gt;&lt;td&gt;ALPS&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2002-04-18&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;BZME &lt;/td&gt;&lt;td&gt; 0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.250&lt;/td&gt;&lt;td&gt; 0.5&lt;/td&gt;&lt;td&gt;UG/L &lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;     &lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;KMPUD#2&lt;/td&gt;&lt;td&gt;2002-10-31&lt;/td&gt;&lt;td&gt;1805&lt;/td&gt;&lt;td&gt;KFR &lt;/td&gt;&lt;td&gt;KMPUD WELL #2&lt;/td&gt;&lt;td&gt;WX&lt;/td&gt;&lt;td&gt;NA     &lt;/td&gt;&lt;td&gt;ALPS&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2002-11-04&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;DCE11&lt;/td&gt;&lt;td&gt; 0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.500&lt;/td&gt;&lt;td&gt; 1.0&lt;/td&gt;&lt;td&gt;UG/L &lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;     &lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;6&lt;/th&gt;&lt;td&gt;Alpine&lt;/td&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt;KMPUD#2&lt;/td&gt;&lt;td&gt;2002-10-31&lt;/td&gt;&lt;td&gt;1805&lt;/td&gt;&lt;td&gt;KFR &lt;/td&gt;&lt;td&gt;KMPUD WELL #2&lt;/td&gt;&lt;td&gt;WX&lt;/td&gt;&lt;td&gt;NA     &lt;/td&gt;&lt;td&gt;ALPS&lt;/td&gt;&lt;td&gt;⋯&lt;/td&gt;&lt;td&gt;2002-11-04&lt;/td&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;BZME &lt;/td&gt;&lt;td&gt; 0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.250&lt;/td&gt;&lt;td&gt; 0.5&lt;/td&gt;&lt;td&gt;UG/L &lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;     &lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;There&amp;rsquo;s 
+&lt;a href=&#34;https://www.waterboards.ca.gov/ust/electronic_submittal/docs/edf_data_dict_2001.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt; about all of the fields, but we can already make sense of some of them. GLOBAL_ID represents a site, and FIELD_PT_NAME is a well. PARLABEL is the code for the name of the contaminant and PARVAL is the concentration reported. There&amp;rsquo;s also helpful QA/QC information, and the latitude and longitude of the wells are in a different file on the geotracker website. We&amp;rsquo;ll focus on one site with the most observations reported.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;library(dplyr)
+
+alpine %&amp;gt;%
+group_by(GLOBAL_ID) %&amp;gt;%
+count() %&amp;gt;%
+arrange(desc(n))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A grouped_df: 7 × 2&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;GLOBAL_ID&lt;/th&gt;&lt;th scope=col&gt;n&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;int&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;td&gt;T0600300011&lt;/td&gt;&lt;td&gt;11764&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;T0600300005&lt;/td&gt;&lt;td&gt; 5776&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;T0600397314&lt;/td&gt;&lt;td&gt; 5131&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;T0600300013&lt;/td&gt;&lt;td&gt; 3780&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;T0600300007&lt;/td&gt;&lt;td&gt; 2145&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;T0600300008&lt;/td&gt;&lt;td&gt; 1532&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;           &lt;/td&gt;&lt;td&gt;    1&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Looks like &lt;code&gt;T0600300011&lt;/code&gt; is our site. Let&amp;rsquo;s try to see what the main chemicals of concern and their concentrations are.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;site &amp;lt;- alpine %&amp;gt;%
+  filter(GLOBAL_ID == &amp;quot;T0600300011&amp;quot;)
+site %&amp;gt;%
+  group_by(PARLABEL) %&amp;gt;%
+  tally(sort = TRUE) %&amp;gt;%
+  head()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A tibble: 6 × 2&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;PARLABEL&lt;/th&gt;&lt;th scope=col&gt;n&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;int&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;td&gt;BZ         &lt;/td&gt;&lt;td&gt;260&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;BZME       &lt;/td&gt;&lt;td&gt;260&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;EBZ        &lt;/td&gt;&lt;td&gt;260&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;XYLENES1314&lt;/td&gt;&lt;td&gt;203&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;XYLO       &lt;/td&gt;&lt;td&gt;203&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MTBE       &lt;/td&gt;&lt;td&gt;194&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The most results came from benzene (BZ), toluene (BZME), ethylbenzene (EBZ), xylene - isomers m &amp;amp; p (XYLENES1314), o-xylene (XYLO), and methyl-tert-butyl ether (MTBE). This is a hydrocarbon site. Now let&amp;rsquo;s try to see which wells are near the source area.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;top_wells &amp;lt;- site %&amp;gt;%
+filter(PARLABEL %in% c(&amp;quot;BZ&amp;quot;, &amp;quot;BZME&amp;quot;, &amp;quot;EBZ&amp;quot;, &amp;quot;XYLENES1314&amp;quot;, &amp;quot;XYLO&amp;quot;, &amp;quot;MTBE&amp;quot;)) %&amp;gt;%
+select(c(&amp;quot;FIELD_PT_NAME&amp;quot;, &amp;quot;LOGDATE&amp;quot;, &amp;quot;MATRIX&amp;quot;, &amp;quot;PARLABEL&amp;quot;, &amp;quot;PARVAL&amp;quot;, &amp;quot;PARVQ&amp;quot;, &amp;quot;LABDL&amp;quot;, &amp;quot;REPDL&amp;quot;, &amp;quot;UNITS&amp;quot;,)) %&amp;gt;%
+group_by(FIELD_PT_NAME) %&amp;gt;%
+tally(sort = TRUE) %&amp;gt;%
+filter(n&amp;gt;100)
+
+# the wells with the most data are:
+top_wells
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A tibble: 6 × 2&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;FIELD_PT_NAME&lt;/th&gt;&lt;th scope=col&gt;n&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;int&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;td&gt;MW-3&lt;/td&gt;&lt;td&gt;167&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MW-2&lt;/td&gt;&lt;td&gt;161&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MWA4&lt;/td&gt;&lt;td&gt;157&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;155&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MWA1&lt;/td&gt;&lt;td&gt;143&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;MWA2&lt;/td&gt;&lt;td&gt;143&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The most sampled wells are MW-3, MW-2, MWA4, MW-1, MWA1, and MWA2. Naming conventions for wells can mean nothing or can mean a lot, and get wackier the longer a site has been around.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;site &amp;lt;- site %&amp;gt;%
+  filter(FIELD_PT_NAME %in% top_wells$FIELD_PT_NAME) %&amp;gt;%
+  filter(PARLABEL %in% c(&amp;quot;BZ&amp;quot;, &amp;quot;BZME&amp;quot;, &amp;quot;EBZ&amp;quot;, &amp;quot;XYLENES1314&amp;quot;, &amp;quot;XYLO&amp;quot;, &amp;quot;MTBE&amp;quot;)) %&amp;gt;%
+  select(c(&amp;quot;FIELD_PT_NAME&amp;quot;, &amp;quot;LOGDATE&amp;quot;, &amp;quot;MATRIX&amp;quot;, &amp;quot;PARLABEL&amp;quot;, &amp;quot;PARVAL&amp;quot;, &amp;quot;PARVQ&amp;quot;, &amp;quot;LABDL&amp;quot;, &amp;quot;REPDL&amp;quot;, &amp;quot;UNITS&amp;quot;,)) 
+
+head(site)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A data.frame: 6 × 9&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;FIELD_PT_NAME&lt;/th&gt;&lt;th scope=col&gt;LOGDATE&lt;/th&gt;&lt;th scope=col&gt;MATRIX&lt;/th&gt;&lt;th scope=col&gt;PARLABEL&lt;/th&gt;&lt;th scope=col&gt;PARVAL&lt;/th&gt;&lt;th scope=col&gt;PARVQ&lt;/th&gt;&lt;th scope=col&gt;LABDL&lt;/th&gt;&lt;th scope=col&gt;REPDL&lt;/th&gt;&lt;th scope=col&gt;UNITS&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;chr&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2002-10-08&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;BZ  &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-09-08&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;BZ  &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2002-11-25&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;XYLO&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;MTBE&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;EBZ &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;6&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;EBZ &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.5&lt;/td&gt;&lt;td&gt;0.5&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let&#39;s take a closer look at the units. The first six observations are reported in &amp;mu;g/L, but are they all? &lt;/p&gt;
+&lt;p&gt;First we&amp;rsquo;ll want to clean up the classes - the &lt;code&gt;FIELD_PT_NAME&lt;/code&gt; should be a factor and &lt;code&gt;LOGDATE&lt;/code&gt; should be a date.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;site$FIELD_PT_NAME &amp;lt;- as.factor(site$FIELD_PT_NAME)
+site$LOGDATE &amp;lt;- as.Date(site$LOGDATE)
+site$MATRIX &amp;lt;- as.factor(site$MATRIX)
+site$PARLABEL &amp;lt;- as.factor(site$PARLABEL)
+site$PARVQ &amp;lt;- as.factor(site$PARVQ)
+site$UNITS &amp;lt;- as.factor(site$UNITS)
+levels(site$PARLABEL) &amp;lt;- list(Benzene=&amp;quot;BZ&amp;quot;, Toluene=&amp;quot;BZME&amp;quot;, Ethylbenzene=&amp;quot;EBZ&amp;quot;, Xylenes_MP=&amp;quot;XYLENES1314&amp;quot;, Xylene_O=&amp;quot;XYLO&amp;quot;, MTBE=&amp;quot;MTBE&amp;quot;)
+
+summary(site)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt; FIELD_PT_NAME    LOGDATE           MATRIX          PARLABEL  
+ MW-1:155      Min.   :2002-07-11   W:926   Benzene     :179  
+ MW-2:161      1st Qu.:2003-05-27           Toluene     :179  
+ MW-3:167      Median :2004-05-05           Ethylbenzene:179  
+ MWA1:143      Mean   :2005-11-06           Xylenes_MP  :132  
+ MWA2:143      3rd Qu.:2008-05-05           Xylene_O    :132  
+ MWA4:157      Max.   :2010-04-14           MTBE        :125  
+     PARVAL        PARVQ        LABDL           REPDL         UNITS    
+ Min.   :   0.00   = :135   Min.   :0.080   Min.   : 0.500   UG/L:926  
+ 1st Qu.:   0.00   ND:791   1st Qu.:0.380   1st Qu.: 0.500             
+ Median :   0.00            Median :0.500   Median : 0.500             
+ Mean   :  20.95            Mean   :1.909   Mean   : 3.568             
+ 3rd Qu.:   0.00            3rd Qu.:5.000   3rd Qu.: 5.000             
+ Max.   :1150.00            Max.   :9.900   Max.   :50.000             
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Turns out that they &lt;i&gt;are&lt;/i&gt; all reported in &amp;mu;g/L, which is good, because that means the concentrations are probably fairly low - remember one &amp;mu;g/L is one part per &lt;i&gt;billion&lt;/i&gt;. This isn&#39;t always the case - be sure to keep an eye out for units and do conversions as necessary before working with the data. The PARVQ tells us if the chemical was detected in the sample or below the detection limit (ND). For 791 of the observations, the chemical was not detected in the sample, while in only 135 observations a true detected concentration is reported. In cases where the chemical is not detected, is NA, zero, the lab detection limit, report detection limit, or something else reported? &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;site %&amp;gt;%
+filter(PARVQ == &#39;ND&#39;) %&amp;gt;%
+head()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;A data.frame: 6 × 9&lt;/caption&gt;
+&lt;thead&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;FIELD_PT_NAME&lt;/th&gt;&lt;th scope=col&gt;LOGDATE&lt;/th&gt;&lt;th scope=col&gt;MATRIX&lt;/th&gt;&lt;th scope=col&gt;PARLABEL&lt;/th&gt;&lt;th scope=col&gt;PARVAL&lt;/th&gt;&lt;th scope=col&gt;PARVQ&lt;/th&gt;&lt;th scope=col&gt;LABDL&lt;/th&gt;&lt;th scope=col&gt;REPDL&lt;/th&gt;&lt;th scope=col&gt;UNITS&lt;/th&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;fct&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;date&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;fct&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;fct&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;fct&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;dbl&amp;gt;&lt;/th&gt;&lt;th scope=col&gt;&amp;lt;fct&amp;gt;&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2002-10-08&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;Benzene     &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-09-08&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;Benzene     &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2002-11-25&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;Xylene_O    &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;MTBE        &lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;Ethylbenzene&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;5.0&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt;&lt;th scope=row&gt;6&lt;/th&gt;&lt;td&gt;MW-1&lt;/td&gt;&lt;td&gt;2003-03-05&lt;/td&gt;&lt;td&gt;W&lt;/td&gt;&lt;td&gt;Ethylbenzene&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;ND&lt;/td&gt;&lt;td&gt;0.5&lt;/td&gt;&lt;td&gt;0.5&lt;/td&gt;&lt;td&gt;UG/L&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;It looks like the value reported for non-detected samples is zero. This can cause problems when analyzing the data statistically. Let&amp;rsquo;s visualize what these concentrations look like at MW-1.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;MW1 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MW-1&amp;quot;)
+
+MW2 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MW-2&amp;quot;)
+
+MW3 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MW-3&amp;quot;)
+
+MWA1 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MWA1&amp;quot;)
+
+MWA2 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MWA2&amp;quot;)
+
+MWA4 &amp;lt;- site %&amp;gt;%
+filter(FIELD_PT_NAME == &amp;quot;MWA4&amp;quot;)
+
+library(ggplot2)
+
+ggplot(MW1, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MW-1&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+
+ggplot(MW2, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MW-2&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+
+ggplot(MW3, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MW-3&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+
+ggplot(MWA1, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MWA1&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+
+ggplot(MWA2, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MWA2&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./index_19_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./index_19_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./index_19_2.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./index_19_3.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./index_19_4.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;At these wells it looks like there were some spikes before 2004, but nothing much going on later. Let&amp;rsquo;s look at the last well from our selection - MWA4.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;ggplot(MWA4, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MWA4&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./index_21_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;This one has a lot higher concentrations - take a look at the values on the y axis. Yikes! Let&amp;rsquo;s see what the 
+&lt;a href=&#34;https://www.epa.gov/ground-water-and-drinking-water/national-primary-drinking-water-regulations&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;EPA Maximum Contaminant Levels (MCLs)&lt;/a&gt; are for these chemicals.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;ggplot(MWA4, aes(x = LOGDATE, y = PARVAL, color = PARLABEL)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MWA4&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Concentration in ug/L&amp;quot;) +
+geom_hline(yintercept=5, linetype=&amp;quot;dashed&amp;quot;, color=&amp;quot;#F8766D&amp;quot;) +
+geom_hline(yintercept=1000, linetype=&amp;quot;dashed&amp;quot;, color=&amp;quot;#B79F00&amp;quot;) +
+geom_hline(yintercept=700, linetype=&amp;quot;dashed&amp;quot;, color=&amp;quot;#00BA38&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./index_23_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;There is no MCL for MTBE (there are probably state guidelines) and the MCL for total xylenes is 10,000, which is off this chart. Benzene has the lowest MCL by far, and it is usually the chemical that drives cleanup. It&amp;rsquo;s a little hard for us to see it on this plot, so let&amp;rsquo;s zoom in some more.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-R&#34;&gt;MWA4_benzene &amp;lt;- MWA4 %&amp;gt;%
+filter(PARLABEL == &amp;quot;Benzene&amp;quot;)
+
+ggplot(MWA4_benzene, aes(x = LOGDATE, y = PARVAL, color = &amp;quot;Benzene&amp;quot;,)) + 
+geom_line() + 
+geom_point(alpha = 0.6) +
+labs(title =&amp;quot;MWA4&amp;quot;, x =&amp;quot;Date&amp;quot;, y = &amp;quot;Benzene Concentration in ug/L&amp;quot;) +
+geom_hline(yintercept=5, linetype=&amp;quot;dashed&amp;quot;, color=&amp;quot;red&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./index_25_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Around 2004 this well has almost seven times the MCL of benzene, but it quickly went down to non-detectable or very low for the rest of the recorded period. If I was especially interested in this site I would try to request some of the accompanying reports and perform a Mann-Kendall analysis of trends in the wells, but mostly I wanted to show how you can download data from Geotracker and manipulate it in R.&lt;/p&gt;
+&lt;p&gt;This tutorial is done entirely in a jupyter notebook running an R kernal inside of a docker container. The source files are on github and if you have any questions about using jupyter or docker don&amp;rsquo;t hesitate to contact me!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Accessing Historical Weather Data with Dark Sky API</title>
@@ -20,9 +291,7 @@
       <description>
 
 
-&lt;div id=&#34;importing-past-weather-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Importing Past Weather Data&lt;/h2&gt;
-&lt;p&gt;In my IoT class last year we used a website called &lt;a href=&#34;https://darksky.net/&#34;&gt;Dark Sky&lt;/a&gt; to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( &lt;em&gt;Happy Canada Day!&lt;/em&gt; ) and several conversations with my advisor.&lt;/p&gt;
+&lt;p&gt;In my IoT class last year with &lt;a href=&#34;https://soilcrop.agsci.colostate.edu/faculty-2/ham-jay/&#34;&gt;Jay Ham&lt;/a&gt; we used a website called &lt;a href=&#34;https://darksky.net/&#34;&gt;Dark Sky&lt;/a&gt; to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( &lt;em&gt;Happy Canada Day!&lt;/em&gt; ) and several conversations with my advisor.&lt;/p&gt;
 &lt;p&gt;I’ll walk through how I imported the data to R.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Dark Sky is a great resource, however, when I went to re-visit the website I found that they have joined Apple. This means they are no longer creating new accounts. Luckily I already had one from my class last fall. The API is still supported through at least the end of 2021. Later I’ll mention some ways that you could get similar (maybe better) data through other channels.&lt;/p&gt;
@@ -85,10 +354,9 @@ ggplot(weather, aes(x = time, y = precipIntensity, group =1)) +
   theme(axis.text.x=element_text(angle=90, hjust=1)) +
   labs(title =&amp;quot;Precipitation Over Time&amp;quot;, x = &amp;quot;Date&amp;quot;, y = &amp;quot;Precipitation in Inches&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/weather/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;You can clearly see the precipitation generating storm events over a few months.&lt;/p&gt;
+&lt;p&gt;You can clearly see the precipitation-generating storm events over a few months.&lt;/p&gt;
 &lt;p&gt;It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;/div&gt;
 &lt;div id=&#34;other-weather-options&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Other Weather Options&lt;/h2&gt;
 &lt;p&gt;Clearly getting historical weather data for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.&lt;/p&gt;

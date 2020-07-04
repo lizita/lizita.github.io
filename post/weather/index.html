@@ -27,7 +27,7 @@
   
     
   
-  <meta name="description" content="Importing Past Weather Data In my IoT class last year we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site.">
+  <meta name="description" content="In my IoT class last year with Jay Ham we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/weather/">
@@ -237,7 +237,7 @@
   <meta property="og:site_name" content="Liz McConnell">
   <meta property="og:url" content="/post/weather/">
   <meta property="og:title" content="Accessing Historical Weather Data with Dark Sky API | Liz McConnell">
-  <meta property="og:description" content="Importing Past Weather Data In my IoT class last year we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site."><meta property="og:image" content="/post/weather/featured.jpg">
+  <meta property="og:description" content="In my IoT class last year with Jay Ham we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site."><meta property="og:image" content="/post/weather/featured.jpg">
   <meta property="twitter:image" content="/post/weather/featured.jpg"><meta property="og:locale" content="en-us">
   
     
@@ -291,7 +291,7 @@
       "url": "/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Importing Past Weather Data In my IoT class last year we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site."
+  "description": "In my IoT class last year with Jay Ham we used a website called Dark Sky to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site."
 }
 </script>
 
@@ -577,6 +577,8 @@
   <h1>Accessing Historical Weather Data with Dark Sky API</h1>
 
   
+  <p class="page-subtitle">Importing Past Weather Data</p>
+  
 
   
 
@@ -654,9 +656,7 @@
       
 
 
-<div id="importing-past-weather-data" class="section level2">
-<h2>Importing Past Weather Data</h2>
-<p>In my IoT class last year we used a website called <a href="https://darksky.net/">Dark Sky</a> to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( <em>Happy Canada Day!</em> ) and several conversations with my advisor.</p>
+<p>In my IoT class last year with <a href="https://soilcrop.agsci.colostate.edu/faculty-2/ham-jay/">Jay Ham</a> we used a website called <a href="https://darksky.net/">Dark Sky</a> to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( <em>Happy Canada Day!</em> ) and several conversations with my advisor.</p>
 <p>I’ll walk through how I imported the data to R.</p>
 <hr />
 <p>Dark Sky is a great resource, however, when I went to re-visit the website I found that they have joined Apple. This means they are no longer creating new accounts. Luckily I already had one from my class last fall. The API is still supported through at least the end of 2021. Later I’ll mention some ways that you could get similar (maybe better) data through other channels.</p>
@@ -719,10 +719,9 @@ ggplot(weather, aes(x = time, y = precipIntensity, group =1)) +
   theme(axis.text.x=element_text(angle=90, hjust=1)) +
   labs(title =&quot;Precipitation Over Time&quot;, x = &quot;Date&quot;, y = &quot;Precipitation in Inches&quot;)</code></pre>
 <p><img src="/post/weather/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>You can clearly see the precipitation generating storm events over a few months.</p>
+<p>You can clearly see the precipitation-generating storm events over a few months.</p>
 <p>It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.</p>
 <hr />
-</div>
 <div id="other-weather-options" class="section level2">
 <h2>Other Weather Options</h2>
 <p>Clearly getting historical weather data for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.</p>
@@ -979,6 +978,8 @@ ggplot(weather, aes(x = time, y = precipIntensity, group =1)) +
   <div class="article-widget content-widget-hr">
     <h3>Related</h3>
     <ul>
+      
+      <li><a href="/post/geotracker/">Mining Data from California&#39;s Geotracker Database</a></li>
       
       <li><a href="/post/2020-06-26-ttafamhistory/">Tidy Tuesday - African American History</a></li>
       

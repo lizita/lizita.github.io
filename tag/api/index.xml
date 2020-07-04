@@ -20,9 +20,7 @@
       <description>
 
 
-&lt;div id=&#34;importing-past-weather-data&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Importing Past Weather Data&lt;/h2&gt;
-&lt;p&gt;In my IoT class last year we used a website called &lt;a href=&#34;https://darksky.net/&#34;&gt;Dark Sky&lt;/a&gt; to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( &lt;em&gt;Happy Canada Day!&lt;/em&gt; ) and several conversations with my advisor.&lt;/p&gt;
+&lt;p&gt;In my IoT class last year with &lt;a href=&#34;https://soilcrop.agsci.colostate.edu/faculty-2/ham-jay/&#34;&gt;Jay Ham&lt;/a&gt; we used a website called &lt;a href=&#34;https://darksky.net/&#34;&gt;Dark Sky&lt;/a&gt; to get current weather conditions. I’ve been thinking about this recently, since I would like to see if I can match up weather conditions to the changes in the depth to water of wells at a site. I was inspired to look into this based on a talk from Jonathan Kennel from the Univesity of Guelph ( &lt;em&gt;Happy Canada Day!&lt;/em&gt; ) and several conversations with my advisor.&lt;/p&gt;
 &lt;p&gt;I’ll walk through how I imported the data to R.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Dark Sky is a great resource, however, when I went to re-visit the website I found that they have joined Apple. This means they are no longer creating new accounts. Luckily I already had one from my class last fall. The API is still supported through at least the end of 2021. Later I’ll mention some ways that you could get similar (maybe better) data through other channels.&lt;/p&gt;
@@ -85,10 +83,9 @@ ggplot(weather, aes(x = time, y = precipIntensity, group =1)) +
   theme(axis.text.x=element_text(angle=90, hjust=1)) +
   labs(title =&amp;quot;Precipitation Over Time&amp;quot;, x = &amp;quot;Date&amp;quot;, y = &amp;quot;Precipitation in Inches&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/weather/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;You can clearly see the precipitation generating storm events over a few months.&lt;/p&gt;
+&lt;p&gt;You can clearly see the precipitation-generating storm events over a few months.&lt;/p&gt;
 &lt;p&gt;It will take me a few days of using my 1000 free API calls to cover the period I’m interested in, but overall it was really easy.&lt;/p&gt;
 &lt;hr /&gt;
-&lt;/div&gt;
 &lt;div id=&#34;other-weather-options&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Other Weather Options&lt;/h2&gt;
 &lt;p&gt;Clearly getting historical weather data for a certain location can be really useful, but since Dark Sky is no longer creating accounts it’s not a very practical resource.&lt;/p&gt;
