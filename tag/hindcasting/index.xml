@@ -5,12 +5,78 @@
     <link>/tag/hindcasting/</link>
       <atom:link href="/tag/hindcasting/index.xml" rel="self" type="application/rss+xml" />
     <description>hindcasting</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Sat, 11 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
       <title>hindcasting</title>
       <link>/tag/hindcasting/</link>
     </image>
+    
+    <item>
+      <title>USGS Data Retrieval</title>
+      <link>/post/streamflowdata/</link>
+      <pubDate>Sat, 11 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/post/streamflowdata/</guid>
+      <description>
+
+
+&lt;p&gt;It took me a few times to get this right - the interface of the USGS website is a rabbit hole of buttons and options for data retrieval. It’s not so hard to get the data you’re interested in, but pay close attention because it’s easy to do the wrong thing. Probably the easiest way is to use the &lt;code&gt;dataRetrieval&lt;/code&gt; &lt;a href=&#34;https://cran.r-project.org/web/packages/dataRetrieval/vignettes/dataRetrieval.html&#34;&gt;package&lt;/a&gt;. The last commits on their &lt;a href=&#34;https://github.com/USGS-R/dataRetrieval&#34;&gt;github&lt;/a&gt; are from 2 months ago, so it’s pretty up-to-date.&lt;/p&gt;
+&lt;p&gt;To use this package, you need to know a few things about the structure of the data. Each USGS streamflow station has a number - you’ll need to know the number for the station you want. There’s also a number associated with each measured value; &lt;code&gt;00060&lt;/code&gt; for discharge in feet per second, &lt;code&gt;00065&lt;/code&gt; for gauge height in feet, &lt;code&gt;00010&lt;/code&gt; for temperature in degrees celcius, and many more. The last critical thing to know is the date range of the data you’re interested in.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Station Number&lt;/li&gt;
+&lt;li&gt;Parameter Code&lt;/li&gt;
+&lt;li&gt;Date Range of Interest&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here’s an example from the documentation:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#install.packages(&amp;quot;dataRetrieval&amp;quot;) #uncomment to install the package
+library(dataRetrieval)
+# Choptank River near Greensboro, MD:
+siteNumber &amp;lt;- &amp;quot;01491000&amp;quot;
+parameterCd &amp;lt;- &amp;quot;00060&amp;quot;  # Discharge
+startDate &amp;lt;- &amp;quot;2009-10-01&amp;quot;  
+endDate &amp;lt;- &amp;quot;2012-09-30&amp;quot; 
+
+discharge &amp;lt;- readNWISdv(siteNumber, 
+                    parameterCd, startDate, endDate)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here’s what the resulting data frame looks like:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;discharge.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The fifth column is a quality code - A stands for approved for release by the USGS.&lt;/p&gt;
+&lt;p&gt;Another notable argument to the &lt;code&gt;readNWISdv&lt;/code&gt; function is &lt;code&gt;statCd&lt;/code&gt;. This allows you to request daily data and specify the statistic used. For example, you can request the daily maximum, mean, median, or total.&lt;/p&gt;
+&lt;p&gt;Pretty simple, right?&lt;/p&gt;
+&lt;p&gt;There are some other handy functions and options in this library. You’ll notice that the colunm names aren’t really descriptive of the data. You can use another function from the package to rename them. Try this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;discharge &amp;lt;- renameNWISColumns(discharge)
+names(discharge)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;agency_cd&amp;quot; &amp;quot;site_no&amp;quot;   &amp;quot;Date&amp;quot;      &amp;quot;Flow&amp;quot;      &amp;quot;Flow_cd&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That can clean things up a lot - especially if you’re importing many parameters.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+ggplot(discharge, aes(x=Date, y=Flow)) + geom_point(alpha = 0.4)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/streamflowdata/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What I am interested is the streamflow data, so this is as far as I need to go. You can also import different kinds of USGS data using other functions of the same package. It’s a treasure trove! Check out the &lt;a href=&#34;https://cran.r-project.org/web/packages/dataRetrieval/vignettes/dataRetrieval.html&#34;&gt;documentation&lt;/a&gt; to get the full scope of its powers.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;I also came across another package called &lt;code&gt;waterData&lt;/code&gt; that can do the same retrieval and maybe some more analysis on the data. I haven’t looked further into this, but the last commits to their &lt;a href=&#34;https://github.com/USGS-R/waterData&#34;&gt;github&lt;/a&gt; are from 3 years ago, so I choose the &lt;code&gt;dataRetrieval&lt;/code&gt; package.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Now I’ll let you in on the less fun bit, which is the way I originally tried to download the data locally then upload to R. I started out fumbling around the website trying to find the gauge closests to the site I’m interested in. There’s an interactive map on the &lt;a href=&#34;https://waterdata.usgs.gov/nwis/rt&#34;&gt;homepage&lt;/a&gt;; you click on a state to get to a more refined map and click around some more to find the gauge you want.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;map.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;You get to a really promising page that gives you some options to select parameters, a date range, and whether you want the output to be a graph, table, or tab-seperated format. This looks good, but is not.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;options.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I chose the tab-seperated option; After a lengthy wait a new tab with the output opened in the browser - so no file download. I guess I could have copied and pasted all of that into a text file, but I decided to search for a way to actually download the file.&lt;/p&gt;
+&lt;p&gt;I found a &lt;a href=&#34;https://help.waterdata.usgs.gov/tutorials/overview/a-primer-on-downloading-data&#34;&gt;USGS primer on dowloading data&lt;/a&gt; (always read the instructions first!), which took some differnet turns than the path I took previoulsy. The user interface is difficult to navigate and not intuitive, but it’s a great resource for data. I won’t go through the whole process, because it’s mostly just clicking on the right spot and choosing your desired options, but here is the most important part:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;savetofile.png&#34; /&gt;
+There are still extra steps of choosing the options in the website, downloading the data, then reading it into R. This is the code I used to read the data once I had downloaded it as a text file and renamed it “streamflow”. If I were to go back, I would &lt;em&gt;not&lt;/em&gt; do it this way, but I guess it doesn’t require downloading a new package and is fine if you’re not dowloading a lot of data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+streamflow &amp;lt;- read.table(&amp;quot;streamflow&amp;quot;, skip = 32) #the first 32 lines are metadata
+
+colnames(streamflow) &amp;lt;- c(&amp;quot;agency&amp;quot;, &amp;quot;site_no&amp;quot;, &amp;quot;date&amp;quot;, &amp;quot;time&amp;quot;, &amp;quot;timezone&amp;quot;, &amp;quot;Flow&amp;quot;, &amp;quot;quality_code&amp;quot;)
+#discharge is in cubic feet per second, quality code A means approved 
+
+streamflow$date &amp;lt;- as.Date(streamflow$date)
+
+ggplot(streamflow, aes(x=date, y=Flow)) + geom_point(alpha=0.4)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/streamflowdata/index_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Hope this info helps you avoid wasting time like I did on my first try! Do you know of a better way to get the data into R? Did you encounter any pitfalls?&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Accessing Historical Weather Data with Dark Sky API</title>
