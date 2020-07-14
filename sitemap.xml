@@ -33,17 +33,12 @@
   </url>
   
   <url>
-    <loc>/tag/api/</loc>
-    <lastmod>2020-07-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
     <lastmod>2020-07-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tag/hindcasting/</loc>
+    <loc>/tag/data-mining/</loc>
     <lastmod>2020-07-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,17 +58,22 @@
   </url>
   
   <url>
+    <loc>/tag/streamflow/</loc>
+    <lastmod>2020-07-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2020-07-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/streamflowdata/</loc>
+    <loc>/tag/usgs/</loc>
     <lastmod>2020-07-11T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tag/weather/</loc>
+    <loc>/post/streamflowdata/</loc>
     <lastmod>2020-07-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -109,6 +109,16 @@
   
   <url>
     <loc>/post/weather/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/api/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/weather/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>USGS | Liz McConnell</title>
-    <link>/tag/usgs/</link>
-      <atom:link href="/tag/usgs/index.xml" rel="self" type="application/rss+xml" />
-    <description>USGS</description>
+    <title>streamflow | Liz McConnell</title>
+    <link>/tag/streamflow/</link>
+      <atom:link href="/tag/streamflow/index.xml" rel="self" type="application/rss+xml" />
+    <description>streamflow</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Sat, 11 Jul 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
-      <title>USGS</title>
-      <link>/tag/usgs/</link>
+      <title>streamflow</title>
+      <link>/tag/streamflow/</link>
     </image>
     
     <item>

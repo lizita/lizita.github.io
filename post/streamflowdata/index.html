@@ -729,12 +729,12 @@ ggplot(discharge, aes(x=Date, y=Flow)) + geom_point(alpha = 0.4)</code></pre>
 <hr />
 <p>I also came across another package called <code>waterData</code> that can do the same retrieval and maybe some more analysis on the data. I haven’t looked further into this, but the last commits to their <a href="https://github.com/USGS-R/waterData">github</a> are from 3 years ago, so I choose the <code>dataRetrieval</code> package.</p>
 <hr />
-<p>Now I’ll let you in on the less fun bit, which is the way I originally tried to download the data locally then upload to R. I started out fumbling around the website trying to find the gauge closests to the site I’m interested in. There’s an interactive map on the <a href="https://waterdata.usgs.gov/nwis/rt">homepage</a>; you click on a state to get to a more refined map and click around some more to find the gauge you want.</p>
+<p>Now I’ll let you in on the less fun bit, which is the way I originally tried to download the data locally then upload to R. I started out fumbling around the website trying to find the gauge closest to the site I’m interested in. There’s an interactive map on the <a href="https://waterdata.usgs.gov/nwis/rt">homepage</a>; you click on a state to get to a more refined map and click around some more to find the gauge you want.</p>
 <p><img src="map.png" /></p>
 <p>You get to a really promising page that gives you some options to select parameters, a date range, and whether you want the output to be a graph, table, or tab-seperated format. This looks good, but is not.</p>
 <p><img src="options.png" /></p>
 <p>I chose the tab-seperated option; After a lengthy wait a new tab with the output opened in the browser - so no file download. I guess I could have copied and pasted all of that into a text file, but I decided to search for a way to actually download the file.</p>
-<p>I found a <a href="https://help.waterdata.usgs.gov/tutorials/overview/a-primer-on-downloading-data">USGS primer on dowloading data</a> (always read the instructions first!), which took some differnet turns than the path I took previoulsy. The user interface is difficult to navigate and not intuitive, but it’s a great resource for data. I won’t go through the whole process, because it’s mostly just clicking on the right spot and choosing your desired options, but here is the most important part:</p>
+<p>I found a <a href="https://help.waterdata.usgs.gov/tutorials/overview/a-primer-on-downloading-data">USGS primer on dowloading data</a> (always read the instructions first!), which took some different turns than the path I took previoulsy. The user interface is difficult to navigate and not intuitive, but it’s a great resource for data. I won’t go through the whole process, because it’s mostly just clicking on the right spot and choosing your desired options, but here is the most important part:</p>
 <p><img src="savetofile.png" />
 There are still extra steps of choosing the options in the website, downloading the data, then reading it into R. This is the code I used to read the data once I had downloaded it as a text file and renamed it “streamflow”. If I were to go back, I would <em>not</em> do it this way, but I guess it doesn’t require downloading a new package and is fine if you’re not dowloading a lot of data.</p>
 <pre class="r"><code>library(tidyverse)
@@ -763,11 +763,11 @@ ggplot(streamflow, aes(x=date, y=Flow)) + geom_point(alpha=0.4)</code></pre>
   
   <a class="badge badge-light" href="/tag/r-markdown/">R Markdown</a>
   
-  <a class="badge badge-light" href="/tag/weather/">weather</a>
+  <a class="badge badge-light" href="/tag/streamflow/">streamflow</a>
   
-  <a class="badge badge-light" href="/tag/hindcasting/">hindcasting</a>
+  <a class="badge badge-light" href="/tag/usgs/">USGS</a>
   
-  <a class="badge badge-light" href="/tag/api/">API</a>
+  <a class="badge badge-light" href="/tag/data-mining/">data mining</a>
   
 </div>
 
