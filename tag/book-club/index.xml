@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>book club | Liz McConnell</title>
+    <link>/tag/book-club/</link>
+      <atom:link href="/tag/book-club/index.xml" rel="self" type="application/rss+xml" />
+    <description>book club</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
+      <title>book club</title>
+      <link>/tag/book-club/</link>
+    </image>
+    
+    <item>
+      <title>Weapons of Math Destruction</title>
+      <link>/post/wmds/</link>
+      <pubDate>Mon, 03 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/post/wmds/</guid>
+      <description>
+
+
+&lt;p&gt;Earlier this summer I got an email about reading groups for grad students hosted by the department of cell and molecular biology. Who wasn’t hungry for a reading group this summer? The first book I signed up to read was Weapons of Math Destruction by Cathy O’Neil. I recognized it because I had heard an &lt;a href=&#34;https://www.npr.org/2016/09/12/493654950/weapons-of-math-destruction-outlines-dangers-of-relying-on-data-analytics&#34;&gt;NPR interview&lt;/a&gt; with the author on the radio. I actually listened to the audiobook because I wasn’t in Fort Collins and libraries were closed (COVID). It was a really engaging story - basically the whole book is composed of examples of “Weapons of Math Destruction”, or WMDs, a term that O’Neil coins in the first chapted to describe models that are important, opaque, and reinforce inequality.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;The features of WMDs are highlighted through examples (so many examples!) of real algorithms that are in use every day. But O’Neil doesn’t just throw lots of examples of WMDs at us, she also describes models that have some negative aspects, but are not on the whole that harmful, and models that are sound uses of statistics. It’s complicated and forces you to confront how insidious these algorithms are.&lt;/p&gt;
+&lt;p&gt;Something that surprised me was her discussion of credit scores. I was all ready to jump on board against credit scores, but that wasn’t her conclusion in the book. This is &lt;em&gt;not&lt;/em&gt; a WMD. The FICO model has a feedback loop, but it corrects itself rather than perpetuates inequality. If many people who are predicted to be risky borrowers pay on time, the model is updated to account for the new data and make better predictions. In addition, the model is fairly transparent - if you are trying to improve your credit score you can easily look up ways to do so. And credit scores are also regulated, so you have legal rights to see your score and know what goes into it.&lt;/p&gt;
+&lt;p&gt;In stark contrast are ubiquitous e-scores used by credit card companies, car dealerships, and advertising agencies that you probably have no idea exist. These scores are created by models that combine lots of seemingly disparate information about you and predict if you’re likely to buy their product. The problem is that the factors the model uses are proxies like zip code, which means that inequality created by racist zoning laws is perpetuated by an algorithm. Predatory for-profit college lead generation companies use algorithms that target people who are earnestly searching for oppurtunities at upward mobility - and make a fortune doing it.&lt;/p&gt;
+&lt;p&gt;Another outraging story was about scheduling software used by low-wage corporations like McDonald’s, Starbucks, and Walmart. They’re designed to optimize saving for the company, so they create ever-changing and erratic schedules that keep workers from qualifying for benefits. In 2014 the &lt;em&gt;New York Times&lt;/em&gt; published an article profiling Jannette Navarro, a Starbucks employee and single mother trying to work her way through college. Her life was so dominated by her work schedule that she couldn’t make her classes consistently or plan for any sort of normal day-care schedule. After the story, legislators drafted a bill to regulate scheduling software but it went nowhere.&lt;/p&gt;
+&lt;p&gt;I’ll leave you with most shocking statistic I read, related to the insurance industry.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;quot;In Florida, adults with clean driving records
+and poor credit scores paid an average of $1,552
+more than the same drivers with excellent credit
+and a &lt;em&gt;drunk driving convition&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A seemingly inocuous number created by an algorithm is plugged in to another algorithm for an utterly ridiculous outcome.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;In the discussion group one person said they were vaguely aware that things like this were happening, but didn’t know the extent or specific examples. It does get somewhat repetitive since the author really pounds the ideas into you with tons of examples, but that didn’t bother me. Another person asked that now that we’ve read the book, what can we do about it? We didn’t come up with a lot of answers - be aware and support policies that regulate them. Are there other actions that people can take to combat the proliferation of Weapons of Math Destruction?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
