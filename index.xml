@@ -214,9 +214,6 @@ LA_wells_TCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
   addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
   addCircleMarkers(lng = ~LONGITUDE,
                    lat = ~LATITUDE, 
-                   radius=8, 
-                   stroke=FALSE,
-                   fillOpacity = 0.2, 
                    color = ~TCEpal(TCE),
                    popup = ~popup) %&amp;gt;% #add colors
   addLegend(pal = TCEpal, values = ~TCE, opacity = 0.7, title = NULL,
@@ -239,16 +236,13 @@ LA_wells_logTCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
   addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
   addCircleMarkers(lng = ~LONGITUDE,
                    lat = ~LATITUDE, 
-                   radius=8, 
-                   stroke=FALSE,
-                   fillOpacity = 0.2, 
                    color = ~logpal(log_TCE),
                    popup = ~popup) 
 
 #LA_wells_logTCE_map&lt;/code&gt;&lt;/pre&gt;
 &lt;iframe seamless src=&#34;LA_wells_logTCE_map.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
 &lt;/iframe&gt;
-&lt;p&gt;If we use the log of the TCE value it’s easier to see the changes in color., though it could still use some fiddling with. I took out the scale becuse the popup still says the real value but the color is now based on a log value. There are probably better color schemes out there but that’s like entering another world, so I’ll leave it at this.&lt;/p&gt;
+&lt;p&gt;If we use the log of the TCE value it’s easier to see the changes in color, though it could still use some fiddling with. I took out the scale becuse the popup still says the real value but the color is now based on a log value. There seem to be &lt;a href=&#34;https://stackoverflow.com/questions/40276569/reverse-order-in-r-leaflet-continuous-legend&#34;&gt;some workarounds&lt;/a&gt; for this but I didn’t try them out. There are probably better color schemes out there but that’s like entering another world, so I’ll leave it at this.&lt;/p&gt;
 &lt;p&gt;I’m sure that there are many ways to improve this map and build on these concepts in leaflet. Take a look at what’s out there an let me know if you discover anything you love!&lt;/p&gt;
 </description>
     </item>
