@@ -1,0 +1,1250 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Liz McConnell">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="I’ve been searching for a way to interactively display some geospatial data. After trying out a few things I found {leaflet} - so easy and beautiful! I started out reading this excellent primer, then got to work with specific examples.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/leaflet/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172424175-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-172424175-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/leaflet/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@liz_in_college">
+  <meta property="twitter:creator" content="@liz_in_college">
+  
+  <meta property="og:site_name" content="Liz McConnell">
+  <meta property="og:url" content="/post/leaflet/">
+  <meta property="og:title" content="Making Maps with Leaflet in R | Liz McConnell">
+  <meta property="og:description" content="I’ve been searching for a way to interactively display some geospatial data. After trying out a few things I found {leaflet} - so easy and beautiful! I started out reading this excellent primer, then got to work with specific examples."><meta property="og:image" content="/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-08-13T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-08-13T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/leaflet/"
+  },
+  "headline": "Making Maps with Leaflet in R",
+  
+  "datePublished": "2020-08-13T00:00:00Z",
+  "dateModified": "2020-08-13T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Liz McConnell"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Liz McConnell",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "I’ve been searching for a way to interactively display some geospatial data. After trying out a few things I found {leaflet} - so easy and beautiful! I started out reading this excellent primer, then got to work with specific examples."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Making Maps with Leaflet in R | Liz McConnell</title>
+
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-center" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#hero"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About Me</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Making Maps with Leaflet in R</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 13, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/leaflet/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+
+
+<p>I’ve been searching for a way to interactively display some geospatial data. After trying out a few things I found {leaflet} - so easy and beautiful! I started out reading this <a href="https://rstudio.github.io/leaflet/">excellent primer</a>, then got to work with specific examples. Let’s take a look and see what it can do -&gt;</p>
+<pre class="r"><code>#libraries
+library(tidyverse) #for manipulating and visualizing data
+library(leaflet) #for making interactive maps
+
+#upload data from Geotracker - LA County
+URL &lt;- &quot;https://geotracker.waterboards.ca.gov/data_download/geo_by_county/LosAngelesGeoXY.zip&quot;
+download.file(URL, destfile=&#39;LosAngelesGeoXY.zip&#39;, method=&#39;curl&#39;)
+unzip(&#39;LosAngelesGeoXY.zip&#39;)
+
+LA_XY &lt;- read.delim(&quot;LosAngelesGeoXY.txt&quot;)
+head(LA_XY)</code></pre>
+<pre><code>##        COUNTY   GLOBAL_ID FIELD_PT_NAME FIELD_PT_CLASS XY_SURVEY_DATE LATITUDE
+## 1 Los Angeles T0603701211      GMX-RPZ7             PZ     2001-01-25 34.02664
+## 2 Los Angeles T0603701211      GMX-RPZ8             PZ     2001-07-11 34.01503
+## 3 Los Angeles T0603701211      GMX-RPZ9             PZ     2001-07-11 34.01506
+## 4 Los Angeles T0603701211       KMX-MW1             MW     1999-08-27 34.01560
+## 5 Los Angeles T0603701211       KMX-MW2             MW     1999-08-27 34.01787
+## 6 Los Angeles T0603701211       KMX-MW3             MW     1999-08-27 34.01728
+##   LONGITUDE XY_METHOD XY_DATUM XY_ACC_VAL  XY_SURVEY_ORG GPS_EQUIP_TYPE
+## 1 -118.4214      CGPS    NAD83          3 Calvada Survey           L530
+## 2 -118.4168      CGPS    NAD83          3 Calvada Survey           L530
+## 3 -118.4169      CGPS    NAD83          3 Calvada Survey           L530
+## 4 -118.4266      CGPS    NAD83          3 Calvada Survey           L530
+## 5 -118.4251      CGPS    NAD83          3 Calvada Survey           L530
+## 6 -118.4246      CGPS    NAD83          3 Calvada Survey           L530
+##   XY_SURVEY_DESC
+## 1               
+## 2               
+## 3               
+## 4               
+## 5               
+## 6</code></pre>
+<p>Similar to the well measurements data, there is <a href="https://www.waterboards.ca.gov/ust/electronic_submittal/docs/geotrackersurvey_xyz_4_14_05.pdf">documentation</a> on the geotracker for each of these column ids. The <code>GLOBAL_ID</code> represents a site and matches up with the concentration data files. Let’s take a closer look at the <code>FIELD_PT_CLASS</code>.</p>
+<pre class="r"><code>LA_XY %&gt;%
+  select(FIELD_PT_CLASS) %&gt;%
+  summary()</code></pre>
+<pre><code>##  FIELD_PT_CLASS
+##    :  1        
+##  BH: 11        
+##  MW:109        
+##  PZ:  6        
+##  SG: 30</code></pre>
+<p>There are four codes in our data - BH, MW, PZ, SG. You might guess that BH is borehole and MW is monitoring well. I would guess that PZ stands for piezometer and I’m actually not sure what SG stands for. The documentation lists 33 valid values for <code>FIELD_PT_CLASS</code>, but PZ and SG are not on the list.</p>
+<p>The date on the documentation is 2005, so maybe these codes have been added in the 15 years since then. A disclaimer at the top of the list states that new values are added occasionally, but the link to see the current list is broken :(</p>
+<p>In any case, we’ll plot these points and see what we can add to make them useful.</p>
+<pre class="r"><code>LA_wells_map &lt;- leaflet(LA_XY) %&gt;%
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;% #using the CartoDB.Positron tiles; there are other options!
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   )
+#LA_wells_map </code></pre>
+<iframe seamless src="LA_wells_map.html" width="100%" height="500">
+</iframe>
+<p>Look at that! With just a few lines of code we’ve made a map of points that we can pan and zoom. I was honestly expecting a lot more sites. There are other basemaps that you can use, so take a look at <a href="https://rstudio.github.io/leaflet/basemaps.html">what’s available</a> and pick what’s right for you. At this point my map doesn’t display that much information though, so let’s see what we can improve.</p>
+<pre class="r"><code>#make a palette to add colors
+pal &lt;- colorFactor(topo.colors(5), LA_XY$FIELD_PT_CLASS)
+
+LA_wells_map_with_color &lt;- leaflet(LA_XY) %&gt;%
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   label= ~as.character(FIELD_PT_CLASS), #add a label
+                   color = ~pal(FIELD_PT_CLASS)) #add colors
+
+#LA_wells_map_with_color</code></pre>
+<iframe seamless src="LA_wells_map_with_color.html" width="100%" height="500">
+</iframe>
+<p>This shows which class the points are and when you hover over the class it shows the class code. If you zoom in to the site near San Gabriel, you can see three monitoring wells (the two close to each other are probably the same one) and a pattern of <code>SG</code> class points that is fairly uniform. The site near El Monte is made up only of boreholes, as is the one near Manhattan Beach. The others have a mix of monitoring wells and piezometers.</p>
+<p>The label field in our call to leaflet creates a tag that shows up when we hover our mouse over it. There’s another field for popup, which will make a box that appears when you click on a point. Let’s add some data and put it in a popup box. To do this we’ll have to get the concentration data for the sites and join by the <code>FIELD_PT_NAME</code></p>
+<pre class="r"><code>URL &lt;- &quot;https://geotracker.waterboards.ca.gov/data_download/edf_by_county/LosAngelesEDF.zip&quot;
+download.file(URL, destfile=&#39;LosAngelesEDF.zip&#39;, method=&#39;curl&#39;)
+unzip(&#39;LosAngelesEDF.zip&#39;)
+
+LA_EDF &lt;- read.delim(&quot;LosAngelesEDF.txt&quot;)
+str(LA_EDF)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    128666 obs. of  23 variables:
+##  $ COUNTY       : Factor w/ 2 levels &quot;\032&quot;,&quot;Los Angeles&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ GLOBAL_ID    : Factor w/ 8 levels &quot;&quot;,&quot;SL603799209&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ FIELD_PT_NAME: Factor w/ 127 levels &quot;&quot;,&quot;15200&quot;,&quot;15210&quot;,..: 50 31 40 50 45 39 39 39 32 40 ...
+##  $ LOGDATE      : Factor w/ 274 levels &quot;&quot;,&quot;2006-07-10&quot;,..: 56 46 46 56 47 46 46 46 46 46 ...
+##  $ LOGTIME      : int  545 1230 945 850 1130 730 850 715 1215 900 ...
+##  $ LOGCODE      : Factor w/ 10 levels &quot;&quot;,&quot;AEII&quot;,&quot;EAIH&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ SAMPID       : Factor w/ 2537 levels &quot;&quot;,&quot;15200&quot;,&quot;15210&quot;,..: 2062 1835 1954 2061 2033 1934 1935 1936 1852 1952 ...
+##  $ MATRIX       : Factor w/ 7 levels &quot;&quot;,&quot;AX&quot;,&quot;GS&quot;,&quot;IA&quot;,..: 6 6 6 6 6 6 6 6 6 6 ...
+##  $ LABWO        : Factor w/ 45 levels &quot;&quot;,&quot;1609-03&quot;,&quot;1803292&quot;,..: 45 45 45 45 45 45 45 45 45 45 ...
+##  $ LABCODE      : Factor w/ 9 levels &quot;&quot;,&quot;AAC&quot;,&quot;ASLL&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ LABSAMPID    : Factor w/ 2656 levels &quot;&quot;,&quot;060703521&quot;,..: 525 437 443 527 455 439 440 435 436 442 ...
+##  $ ANMCODE      : Factor w/ 24 levels &quot;&quot;,&quot;8260+OX&quot;,&quot;8260FA&quot;,..: 23 23 23 23 23 23 23 23 23 23 ...
+##  $ LABLOTCTL    : Factor w/ 652 levels &quot;&quot;,&quot;060711B01&quot;,..: 144 123 127 144 129 123 123 123 123 123 ...
+##  $ ANADATE      : Factor w/ 384 levels &quot;&quot;,&quot;2006-07-11&quot;,..: 87 72 74 87 76 72 72 72 72 72 ...
+##  $ BASIS        : Factor w/ 7 levels &quot;&quot;,&quot;A&quot;,&quot;D&quot;,&quot;L&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ PARLABEL     : Factor w/ 150 levels &quot;&quot;,&quot;4:2FTS&quot;,&quot;6:2FTS&quot;,..: 80 12 56 141 90 141 100 82 141 68 ...
+##  $ PARVAL       : num  10 1 1 1 10 1 5 1 1 2 ...
+##  $ PARVQ        : Factor w/ 5 levels &quot;&quot;,&quot;&lt;&quot;,&quot;=&quot;,&quot;ND&quot;,..: 2 2 2 2 3 2 2 2 2 2 ...
+##  $ LABDL        : num  5.4 0.24 0.36 0.23 4.3 0.23 1.5 0.26 0.23 0.18 ...
+##  $ REPDL        : num  10 1 1 1 10 1 5 1 1 2 ...
+##  $ UNITS        : Factor w/ 10 levels &quot;&quot;,&quot;MG/KG&quot;,&quot;MG/L&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ DILFAC       : num  1 1 1 1 1 1 5 1 1 1 ...
+##  $ LNOTE        : Factor w/ 72 levels &quot;&quot;,&quot;B&quot;,&quot;B,VCO&quot;,..: 1 1 1 1 68 1 1 1 1 1 ...</code></pre>
+<p>Ooof that’s a lot of data. The question now is what do we want to put in the popup? Most recent concentration of a small class of chemicals? Maximum concentration? Could we add a plot of the concentration over time? I haven’t been able to get the plot-within-a-plot working (yet), so let’s go with maximum concentration of Trichloroethene (TCE) at each well.</p>
+<pre class="r"><code>TCE_conc &lt;- LA_EDF %&gt;%
+  filter(PARLABEL == &quot;TCE&quot;) %&gt;% 
+  group_by(FIELD_PT_NAME) %&gt;% 
+  mutate(TCE = max(PARVAL)) %&gt;%
+  select(FIELD_PT_NAME, TCE, UNITS) %&gt;%
+  filter(UNITS %in% c(&quot;UG/L&quot;, &quot;MG/L&quot;)) %&gt;%
+  unique() %&gt;%
+  mutate(value = case_when(UNITS == &quot;MG/L&quot; ~ 1000, T ~ 1)) %&gt;% #create a col with conversion factor
+  mutate(TCE = TCE*value) #convert mg/L to ug/L
+
+LA_TCE_xy &lt;- TCE_conc %&gt;%
+  inner_join(LA_XY, by = &quot;FIELD_PT_NAME&quot;) %&gt;%
+  select(FIELD_PT_NAME, TCE, LATITUDE, LONGITUDE)
+
+TCEpal &lt;- colorNumeric(
+  palette = &quot;YlGnBu&quot;,
+  domain = 0:110)
+
+popup1 &lt;- &quot;TCE concentration: &quot;  #I bet there&#39;s a better way to do this
+popup2 &lt;- &quot; ug/L&quot;                #Tell me in the comments!
+
+LA_TCE_xy$pop1 &lt;- popup1         #Like and subscribe!
+LA_TCE_xy$pop2 &lt;- popup2
+LA_TCE_xy$popup &lt;- paste0(LA_TCE_xy$pop1, LA_TCE_xy$TCE, LA_TCE_xy$pop2)
+
+LA_wells_TCE_map &lt;- leaflet(LA_TCE_xy) %&gt;%
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   radius=8, 
+                   stroke=FALSE,
+                   fillOpacity = 0.2, 
+                   color = ~TCEpal(TCE),
+                   popup = ~popup) %&gt;% #add colors
+  addLegend(pal = TCEpal, values = ~TCE, opacity = 0.7, title = NULL,
+  position = &quot;bottomright&quot;)
+
+#LA_wells_TCE_map</code></pre>
+<iframe seamless src="LA_wells_TCE_map.html" width="100%" height="500">
+</iframe>
+<p>You may notice some annoying things about this map; most of the values are very low so they skew the colors to almost zero and the scale starts with highest values on the bottom, which is counterintuitive to me. Also we’ve lost some points - the spatial file had 157 points but when we join it with concentration data we’re left with 69 points.</p>
+<p>One common way to visualize data with a large range is with a log transformation. Let’s try it out!</p>
+<pre class="r"><code>LA_TCE_xy &lt;- LA_TCE_xy %&gt;%        #log transform the concentrations
+  mutate(TCE = case_when(TCE == 0 ~ 0.0001, T ~ TCE)) %&gt;%
+  mutate(log_TCE = log(TCE))
+
+logpal &lt;- colorNumeric(
+  palette = &quot;YlGnBu&quot;,
+  domain = -9.2105:4.701)
+
+LA_wells_logTCE_map &lt;- leaflet(LA_TCE_xy) %&gt;%
+  addProviderTiles(&quot;CartoDB.Positron&quot;) %&gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   radius=8, 
+                   stroke=FALSE,
+                   fillOpacity = 0.2, 
+                   color = ~logpal(log_TCE),
+                   popup = ~popup) 
+
+#LA_wells_logTCE_map</code></pre>
+<iframe seamless src="LA_wells_logTCE_map.html" width="100%" height="500">
+</iframe>
+<p>If we use the log of the TCE value it’s easier to see the changes in color., though it could still use some fiddling with. I took out the scale becuse the popup still says the real value but the color is now based on a log value. There are probably better color schemes out there but that’s like entering another world, so I’ll leave it at this.</p>
+<p>I’m sure that there are many ways to improve this map and build on these concepts in leaflet. Take a look at what’s out there an let me know if you discover anything you love!</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/r-markdown/">R Markdown</a>
+  
+  <a class="badge badge-light" href="/tag/geotracker/">geotracker</a>
+  
+  <a class="badge badge-light" href="/tag/data-mining/">data mining</a>
+  
+  <a class="badge badge-light" href="/tag/geospatial/">geospatial</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/leaflet/&amp;text=Making%20Maps%20with%20Leaflet%20in%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Making%20Maps%20with%20Leaflet%20in%20R&amp;body=/post/leaflet/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/leaflet/&amp;title=Making%20Maps%20with%20Leaflet%20in%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Making%20Maps%20with%20Leaflet%20in%20R%20/post/leaflet/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/liz-mcconnell/avatar_huc6def5c6ddf7b4910e157584bb4541b6_26457_270x270_fill_q90_lanczos_center.jpg" alt="Liz McConnell">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="/">Liz McConnell</a></h5>
+        <h6 class="card-subtitle">Graduate Student, CSU Center for Contaminant Hydrology</h6>
+        <p class="card-text">My research interests include contaminant fate and transport, data analysis using statistics and machine learning, R programming, and geospatial analysis.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/liz_in_college" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/lizita" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "lizita-github-io" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/streamflowdata/">USGS Data Retrieval</a></li>
+      
+      <li><a href="/post/geotracker/">Mining Data from California&#39;s Geotracker Database</a></li>
+      
+      <li><a href="/post/weather/">Accessing Historical Weather Data with Dark Sky API</a></li>
+      
+      <li><a href="/post/2020-06-26-ttafamhistory/">Tidy Tuesday - African American History</a></li>
+      
+      <li><a href="/post/2015-07-23-r-rmarkdown/">Hello R Markdown</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://lizita-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.66c553246b0f279a03be6e5597f72b52.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    Liz McConnell © 2020
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

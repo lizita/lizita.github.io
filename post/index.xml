@@ -5,12 +5,189 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Mon, 03 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Thu, 13 Aug 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Making Maps with Leaflet in R</title>
+      <link>/post/leaflet/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/post/leaflet/</guid>
+      <description>
+
+
+&lt;p&gt;I’ve been searching for a way to interactively display some geospatial data. After trying out a few things I found {leaflet} - so easy and beautiful! I started out reading this &lt;a href=&#34;https://rstudio.github.io/leaflet/&#34;&gt;excellent primer&lt;/a&gt;, then got to work with specific examples. Let’s take a look and see what it can do -&amp;gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#libraries
+library(tidyverse) #for manipulating and visualizing data
+library(leaflet) #for making interactive maps
+
+#upload data from Geotracker - LA County
+URL &amp;lt;- &amp;quot;https://geotracker.waterboards.ca.gov/data_download/geo_by_county/LosAngelesGeoXY.zip&amp;quot;
+download.file(URL, destfile=&amp;#39;LosAngelesGeoXY.zip&amp;#39;, method=&amp;#39;curl&amp;#39;)
+unzip(&amp;#39;LosAngelesGeoXY.zip&amp;#39;)
+
+LA_XY &amp;lt;- read.delim(&amp;quot;LosAngelesGeoXY.txt&amp;quot;)
+head(LA_XY)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        COUNTY   GLOBAL_ID FIELD_PT_NAME FIELD_PT_CLASS XY_SURVEY_DATE LATITUDE
+## 1 Los Angeles T0603701211      GMX-RPZ7             PZ     2001-01-25 34.02664
+## 2 Los Angeles T0603701211      GMX-RPZ8             PZ     2001-07-11 34.01503
+## 3 Los Angeles T0603701211      GMX-RPZ9             PZ     2001-07-11 34.01506
+## 4 Los Angeles T0603701211       KMX-MW1             MW     1999-08-27 34.01560
+## 5 Los Angeles T0603701211       KMX-MW2             MW     1999-08-27 34.01787
+## 6 Los Angeles T0603701211       KMX-MW3             MW     1999-08-27 34.01728
+##   LONGITUDE XY_METHOD XY_DATUM XY_ACC_VAL  XY_SURVEY_ORG GPS_EQUIP_TYPE
+## 1 -118.4214      CGPS    NAD83          3 Calvada Survey           L530
+## 2 -118.4168      CGPS    NAD83          3 Calvada Survey           L530
+## 3 -118.4169      CGPS    NAD83          3 Calvada Survey           L530
+## 4 -118.4266      CGPS    NAD83          3 Calvada Survey           L530
+## 5 -118.4251      CGPS    NAD83          3 Calvada Survey           L530
+## 6 -118.4246      CGPS    NAD83          3 Calvada Survey           L530
+##   XY_SURVEY_DESC
+## 1               
+## 2               
+## 3               
+## 4               
+## 5               
+## 6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Similar to the well measurements data, there is &lt;a href=&#34;https://www.waterboards.ca.gov/ust/electronic_submittal/docs/geotrackersurvey_xyz_4_14_05.pdf&#34;&gt;documentation&lt;/a&gt; on the geotracker for each of these column ids. The &lt;code&gt;GLOBAL_ID&lt;/code&gt; represents a site and matches up with the concentration data files. Let’s take a closer look at the &lt;code&gt;FIELD_PT_CLASS&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;LA_XY %&amp;gt;%
+  select(FIELD_PT_CLASS) %&amp;gt;%
+  summary()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  FIELD_PT_CLASS
+##    :  1        
+##  BH: 11        
+##  MW:109        
+##  PZ:  6        
+##  SG: 30&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are four codes in our data - BH, MW, PZ, SG. You might guess that BH is borehole and MW is monitoring well. I would guess that PZ stands for piezometer and I’m actually not sure what SG stands for. The documentation lists 33 valid values for &lt;code&gt;FIELD_PT_CLASS&lt;/code&gt;, but PZ and SG are not on the list.&lt;/p&gt;
+&lt;p&gt;The date on the documentation is 2005, so maybe these codes have been added in the 15 years since then. A disclaimer at the top of the list states that new values are added occasionally, but the link to see the current list is broken :(&lt;/p&gt;
+&lt;p&gt;In any case, we’ll plot these points and see what we can add to make them useful.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;LA_wells_map &amp;lt;- leaflet(LA_XY) %&amp;gt;%
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;% #using the CartoDB.Positron tiles; there are other options!
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   )
+#LA_wells_map &lt;/code&gt;&lt;/pre&gt;
+&lt;iframe seamless src=&#34;LA_wells_map.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;Look at that! With just a few lines of code we’ve made a map of points that we can pan and zoom. I was honestly expecting a lot more sites. There are other basemaps that you can use, so take a look at &lt;a href=&#34;https://rstudio.github.io/leaflet/basemaps.html&#34;&gt;what’s available&lt;/a&gt; and pick what’s right for you. At this point my map doesn’t display that much information though, so let’s see what we can improve.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#make a palette to add colors
+pal &amp;lt;- colorFactor(topo.colors(5), LA_XY$FIELD_PT_CLASS)
+
+LA_wells_map_with_color &amp;lt;- leaflet(LA_XY) %&amp;gt;%
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   label= ~as.character(FIELD_PT_CLASS), #add a label
+                   color = ~pal(FIELD_PT_CLASS)) #add colors
+
+#LA_wells_map_with_color&lt;/code&gt;&lt;/pre&gt;
+&lt;iframe seamless src=&#34;LA_wells_map_with_color.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;This shows which class the points are and when you hover over the class it shows the class code. If you zoom in to the site near San Gabriel, you can see three monitoring wells (the two close to each other are probably the same one) and a pattern of &lt;code&gt;SG&lt;/code&gt; class points that is fairly uniform. The site near El Monte is made up only of boreholes, as is the one near Manhattan Beach. The others have a mix of monitoring wells and piezometers.&lt;/p&gt;
+&lt;p&gt;The label field in our call to leaflet creates a tag that shows up when we hover our mouse over it. There’s another field for popup, which will make a box that appears when you click on a point. Let’s add some data and put it in a popup box. To do this we’ll have to get the concentration data for the sites and join by the &lt;code&gt;FIELD_PT_NAME&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;URL &amp;lt;- &amp;quot;https://geotracker.waterboards.ca.gov/data_download/edf_by_county/LosAngelesEDF.zip&amp;quot;
+download.file(URL, destfile=&amp;#39;LosAngelesEDF.zip&amp;#39;, method=&amp;#39;curl&amp;#39;)
+unzip(&amp;#39;LosAngelesEDF.zip&amp;#39;)
+
+LA_EDF &amp;lt;- read.delim(&amp;quot;LosAngelesEDF.txt&amp;quot;)
+str(LA_EDF)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;data.frame&amp;#39;:    128666 obs. of  23 variables:
+##  $ COUNTY       : Factor w/ 2 levels &amp;quot;\032&amp;quot;,&amp;quot;Los Angeles&amp;quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ GLOBAL_ID    : Factor w/ 8 levels &amp;quot;&amp;quot;,&amp;quot;SL603799209&amp;quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ FIELD_PT_NAME: Factor w/ 127 levels &amp;quot;&amp;quot;,&amp;quot;15200&amp;quot;,&amp;quot;15210&amp;quot;,..: 50 31 40 50 45 39 39 39 32 40 ...
+##  $ LOGDATE      : Factor w/ 274 levels &amp;quot;&amp;quot;,&amp;quot;2006-07-10&amp;quot;,..: 56 46 46 56 47 46 46 46 46 46 ...
+##  $ LOGTIME      : int  545 1230 945 850 1130 730 850 715 1215 900 ...
+##  $ LOGCODE      : Factor w/ 10 levels &amp;quot;&amp;quot;,&amp;quot;AEII&amp;quot;,&amp;quot;EAIH&amp;quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ SAMPID       : Factor w/ 2537 levels &amp;quot;&amp;quot;,&amp;quot;15200&amp;quot;,&amp;quot;15210&amp;quot;,..: 2062 1835 1954 2061 2033 1934 1935 1936 1852 1952 ...
+##  $ MATRIX       : Factor w/ 7 levels &amp;quot;&amp;quot;,&amp;quot;AX&amp;quot;,&amp;quot;GS&amp;quot;,&amp;quot;IA&amp;quot;,..: 6 6 6 6 6 6 6 6 6 6 ...
+##  $ LABWO        : Factor w/ 45 levels &amp;quot;&amp;quot;,&amp;quot;1609-03&amp;quot;,&amp;quot;1803292&amp;quot;,..: 45 45 45 45 45 45 45 45 45 45 ...
+##  $ LABCODE      : Factor w/ 9 levels &amp;quot;&amp;quot;,&amp;quot;AAC&amp;quot;,&amp;quot;ASLL&amp;quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ LABSAMPID    : Factor w/ 2656 levels &amp;quot;&amp;quot;,&amp;quot;060703521&amp;quot;,..: 525 437 443 527 455 439 440 435 436 442 ...
+##  $ ANMCODE      : Factor w/ 24 levels &amp;quot;&amp;quot;,&amp;quot;8260+OX&amp;quot;,&amp;quot;8260FA&amp;quot;,..: 23 23 23 23 23 23 23 23 23 23 ...
+##  $ LABLOTCTL    : Factor w/ 652 levels &amp;quot;&amp;quot;,&amp;quot;060711B01&amp;quot;,..: 144 123 127 144 129 123 123 123 123 123 ...
+##  $ ANADATE      : Factor w/ 384 levels &amp;quot;&amp;quot;,&amp;quot;2006-07-11&amp;quot;,..: 87 72 74 87 76 72 72 72 72 72 ...
+##  $ BASIS        : Factor w/ 7 levels &amp;quot;&amp;quot;,&amp;quot;A&amp;quot;,&amp;quot;D&amp;quot;,&amp;quot;L&amp;quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+##  $ PARLABEL     : Factor w/ 150 levels &amp;quot;&amp;quot;,&amp;quot;4:2FTS&amp;quot;,&amp;quot;6:2FTS&amp;quot;,..: 80 12 56 141 90 141 100 82 141 68 ...
+##  $ PARVAL       : num  10 1 1 1 10 1 5 1 1 2 ...
+##  $ PARVQ        : Factor w/ 5 levels &amp;quot;&amp;quot;,&amp;quot;&amp;lt;&amp;quot;,&amp;quot;=&amp;quot;,&amp;quot;ND&amp;quot;,..: 2 2 2 2 3 2 2 2 2 2 ...
+##  $ LABDL        : num  5.4 0.24 0.36 0.23 4.3 0.23 1.5 0.26 0.23 0.18 ...
+##  $ REPDL        : num  10 1 1 1 10 1 5 1 1 2 ...
+##  $ UNITS        : Factor w/ 10 levels &amp;quot;&amp;quot;,&amp;quot;MG/KG&amp;quot;,&amp;quot;MG/L&amp;quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ DILFAC       : num  1 1 1 1 1 1 5 1 1 1 ...
+##  $ LNOTE        : Factor w/ 72 levels &amp;quot;&amp;quot;,&amp;quot;B&amp;quot;,&amp;quot;B,VCO&amp;quot;,..: 1 1 1 1 68 1 1 1 1 1 ...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ooof that’s a lot of data. The question now is what do we want to put in the popup? Most recent concentration of a small class of chemicals? Maximum concentration? Could we add a plot of the concentration over time? I haven’t been able to get the plot-within-a-plot working (yet), so let’s go with maximum concentration of Trichloroethene (TCE) at each well.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;TCE_conc &amp;lt;- LA_EDF %&amp;gt;%
+  filter(PARLABEL == &amp;quot;TCE&amp;quot;) %&amp;gt;% 
+  group_by(FIELD_PT_NAME) %&amp;gt;% 
+  mutate(TCE = max(PARVAL)) %&amp;gt;%
+  select(FIELD_PT_NAME, TCE, UNITS) %&amp;gt;%
+  filter(UNITS %in% c(&amp;quot;UG/L&amp;quot;, &amp;quot;MG/L&amp;quot;)) %&amp;gt;%
+  unique() %&amp;gt;%
+  mutate(value = case_when(UNITS == &amp;quot;MG/L&amp;quot; ~ 1000, T ~ 1)) %&amp;gt;% #create a col with conversion factor
+  mutate(TCE = TCE*value) #convert mg/L to ug/L
+
+LA_TCE_xy &amp;lt;- TCE_conc %&amp;gt;%
+  inner_join(LA_XY, by = &amp;quot;FIELD_PT_NAME&amp;quot;) %&amp;gt;%
+  select(FIELD_PT_NAME, TCE, LATITUDE, LONGITUDE)
+
+TCEpal &amp;lt;- colorNumeric(
+  palette = &amp;quot;YlGnBu&amp;quot;,
+  domain = 0:110)
+
+popup1 &amp;lt;- &amp;quot;TCE concentration: &amp;quot;  #I bet there&amp;#39;s a better way to do this
+popup2 &amp;lt;- &amp;quot; ug/L&amp;quot;                #Tell me in the comments!
+
+LA_TCE_xy$pop1 &amp;lt;- popup1         #Like and subscribe!
+LA_TCE_xy$pop2 &amp;lt;- popup2
+LA_TCE_xy$popup &amp;lt;- paste0(LA_TCE_xy$pop1, LA_TCE_xy$TCE, LA_TCE_xy$pop2)
+
+LA_wells_TCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   radius=8, 
+                   stroke=FALSE,
+                   fillOpacity = 0.2, 
+                   color = ~TCEpal(TCE),
+                   popup = ~popup) %&amp;gt;% #add colors
+  addLegend(pal = TCEpal, values = ~TCE, opacity = 0.7, title = NULL,
+  position = &amp;quot;bottomright&amp;quot;)
+
+#LA_wells_TCE_map&lt;/code&gt;&lt;/pre&gt;
+&lt;iframe seamless src=&#34;LA_wells_TCE_map.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;You may notice some annoying things about this map; most of the values are very low so they skew the colors to almost zero and the scale starts with highest values on the bottom, which is counterintuitive to me. Also we’ve lost some points - the spatial file had 157 points but when we join it with concentration data we’re left with 69 points.&lt;/p&gt;
+&lt;p&gt;One common way to visualize data with a large range is with a log transformation. Let’s try it out!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;LA_TCE_xy &amp;lt;- LA_TCE_xy %&amp;gt;%        #log transform the concentrations
+  mutate(TCE = case_when(TCE == 0 ~ 0.0001, T ~ TCE)) %&amp;gt;%
+  mutate(log_TCE = log(TCE))
+
+logpal &amp;lt;- colorNumeric(
+  palette = &amp;quot;YlGnBu&amp;quot;,
+  domain = -9.2105:4.701)
+
+LA_wells_logTCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
+  addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
+  addCircleMarkers(lng = ~LONGITUDE,
+                   lat = ~LATITUDE, 
+                   radius=8, 
+                   stroke=FALSE,
+                   fillOpacity = 0.2, 
+                   color = ~logpal(log_TCE),
+                   popup = ~popup) 
+
+#LA_wells_logTCE_map&lt;/code&gt;&lt;/pre&gt;
+&lt;iframe seamless src=&#34;LA_wells_logTCE_map.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;If we use the log of the TCE value it’s easier to see the changes in color., though it could still use some fiddling with. I took out the scale becuse the popup still says the real value but the color is now based on a log value. There are probably better color schemes out there but that’s like entering another world, so I’ll leave it at this.&lt;/p&gt;
+&lt;p&gt;I’m sure that there are many ways to improve this map and build on these concepts in leaflet. Take a look at what’s out there an let me know if you discover anything you love!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Weapons of Math Destruction</title>
