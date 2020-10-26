@@ -5,12 +5,72 @@
     <link>/tag/tidytuesday/</link>
       <atom:link href="/tag/tidytuesday/index.xml" rel="self" type="application/rss+xml" />
     <description>tidytuesday</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Fri, 26 Jun 2020 21:13:14 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Liz McConnell © 2020</copyright><lastBuildDate>Tue, 18 Aug 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu06d963f22cc5d003786a3f474238bf81_14484_512x512_fill_lanczos_center_2.png</url>
       <title>tidytuesday</title>
       <link>/tag/tidytuesday/</link>
     </image>
+    
+    <item>
+      <title>Threatened Plants #TidyTuesday</title>
+      <link>/post/plant_threats/</link>
+      <pubDate>Tue, 18 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/post/plant_threats/</guid>
+      <description>
+
+
+&lt;p&gt;It’s Tidy Tuesday!! This week the focus is threatened and extinct plants. Certainly an issue worth thinking about. I’m a bit of a plant person, but really who isn’t? Let’s dive in!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#libraries
+library(tidyverse)
+library(tidytuesdayR)
+library(skimr)
+library(tidytext)
+
+#load data
+tuesdata &amp;lt;- tidytuesdayR::tt_load(2020, week = 34)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Downloading file 1 of 3: `plants.csv`
+##  Downloading file 2 of 3: `threats.csv`
+##  Downloading file 3 of 3: `actions.csv`&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plants &amp;lt;- tuesdata$plants
+threats &amp;lt;- tuesdata$threats
+actions &amp;lt;- tuesdata$actions
+
+threat_filtered &amp;lt;- threats %&amp;gt;% 
+  filter(threatened == 1) 
+
+action_filtered &amp;lt;- actions %&amp;gt;% 
+  filter(action_taken == 1) 
+
+threat_filtered %&amp;gt;% 
+  count(continent, group, threat_type) %&amp;gt;% 
+  ggplot(aes(y = tidytext::reorder_within(threat_type, n, continent), x = n, fill = group)) +
+  geom_col() +
+  tidytext::scale_y_reordered() +
+  facet_wrap(~continent, scales = &amp;quot;free&amp;quot;, ncol = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/plant_threats/index_files/figure-html/setup-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;action_filtered %&amp;gt;% 
+  count(continent, group, action_type) %&amp;gt;% 
+  ggplot(aes(y = tidytext::reorder_within(action_type, n, continent), x = n, fill = group)) +
+  geom_col() +
+  tidytext::scale_y_reordered() +
+  facet_wrap(~continent, scales = &amp;quot;free&amp;quot;, ncol = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/plant_threats/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;
+Some interesting data. I wonder, could see improvement in the status of the plant after an intervention, and are some threats are easy to mitigate while others can’t be stopped?&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;year_last_seen&lt;/code&gt; column is seperated into 20-year chunks and the &lt;code&gt;red_list_caregory&lt;/code&gt; has two options, “Extinct”, or “Extinct in the Wild”. I guess a successful re-introduction would be represented by a change from “Extinct in the Wild” to off of the list…but let’s see if that’s actually what’s in the data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;actions_change &amp;lt;- action_filtered %&amp;gt;%
+  select(c(binomial_name, year_last_seen, red_list_category, action_type)) %&amp;gt;%
+  mutate(date = case_when(year_last_seen == &amp;quot;2000-2020&amp;quot; ~ &amp;quot;2020&amp;quot;, year_last_seen == &amp;quot;1980-1999&amp;quot; ~ &amp;quot;1999&amp;quot;, year_last_seen == &amp;quot;1960-1979&amp;quot; ~ &amp;quot;1979&amp;quot;, year_last_seen == &amp;quot;1940-1959&amp;quot; ~ &amp;quot;1959&amp;quot;, year_last_seen == &amp;quot;1920-1939&amp;quot; ~ &amp;quot;1939&amp;quot;, year_last_seen == &amp;quot;1900-1919&amp;quot; ~ &amp;quot;1919&amp;quot;, year_last_seen == &amp;quot;Before 1900&amp;quot; ~ &amp;quot;1900&amp;quot;, T ~ &amp;quot;NA&amp;quot;)) 
+
+most_listed &amp;lt;- actions_change %&amp;gt;%
+  count(binomial_name) %&amp;gt;%
+  filter(n &amp;gt;= 2)
+
+most_changes &amp;lt;- actions_change %&amp;gt;%
+  filter(binomial_name %in% most_listed$binomial_name)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Tidy Tuesday - African American History</title>

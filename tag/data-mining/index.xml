@@ -166,7 +166,7 @@ LA_wells_TCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
 
 logpal &amp;lt;- colorNumeric(
   palette = &amp;quot;YlGnBu&amp;quot;,
-  domain = -9.2105:4.701)
+  domain = -9.2105:14.701)
 
 LA_wells_logTCE_map &amp;lt;- leaflet(LA_TCE_xy) %&amp;gt;%
   addProviderTiles(&amp;quot;CartoDB.Positron&amp;quot;) %&amp;gt;%
